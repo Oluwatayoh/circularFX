@@ -1,0 +1,77 @@
+<div class="liveDataContainer">
+    <div class="liveDataTitle">Live Market Prices</div>
+    <div class="liveData">
+        <section class="slide-option">
+            <div id="infinite" class="highway-slider">
+                <div class="container highway-barrier">
+                    <ul class="highway-lane">
+                        <li class="highway-car" *ngFor="let fx of fxData">
+                            <div class="col-4">
+                                <h6 class="name" > {{fx.name}}</h6>
+                                <div class="rw">
+                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
+                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
+                                        class="percent">{{fx.percentage_raise}}%</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="highway-car" *ngFor="let fx of fxData">
+                            <div class="col-4">
+                                <h6 class="name" > {{fx.name}}</h6>
+                                <div class="rw">
+                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
+                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
+                                        class="percent">{{fx.percentage_raise}}%</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="highway-car" *ngFor="let fx of fxData">
+                            <div class="col-4">
+                                <h6 class="name" > {{fx.name}}</h6>
+                                <div class="rw">
+                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
+                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
+                                        class="percent">{{fx.percentage_raise}}%</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="highway-car" *ngFor="let fx of fxData">
+                            <div class="col-4">
+                                <h6 class="name" > {{fx.name}}</h6>
+                                <div class="rw">
+                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
+                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
+                                        class="percent">{{fx.percentage_raise}}%</div>
+                                </div>
+                            </div>
+                        </li>
+
+
+
+                        <!-- <li class="highway-car">
+                            <label>This i l njvnkj sfjkjh</label>
+                        </li>
+                        <li class="highway-car">
+                            <label>This i , xjxksfjkjh</label>
+                        </li>
+                        <li class="highway-car">
+                            <label>This i kdkljsjdjsd sfjkjh</label>
+                        </li>
+                        <li class="highway-car">
+                            <label>This ldn w wvbdbv</label>
+                        </li>
+                        <li class="highway-car"> <label>This i sfjkjh</label></li>
+                        <li class="highway-car"> <label>This i l njvnkj sfjkjh</label></li>
+                        <li class="highway-car"> <label>This i , xjxksfjkjh</label></li>
+                        <li class="highway-car"> <label>This i kdkljsjdjsd sfjkjh</label></li>
+                        <li class="highway-car"> <label>This ldn w wvbdbv</label></li>
+                        <li class="highway-car"><label>This i sfjkjh</label></li>
+                        <li class="highway-car"><label>This i sfjkjh</label></li> -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>

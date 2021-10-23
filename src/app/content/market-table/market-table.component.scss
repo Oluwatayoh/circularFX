@@ -1,0 +1,163 @@
+.index {
+    width: 5rem;
+}
+
+.index2 {
+    width: 2rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+// .content-container {
+//     width: 100%;
+//     display: flex;
+//     align-items: baseline;
+//     justify-content: space-between;
+//     padding: 1rem 2rem;
+//     color: var(--wizer-grey);
+
+//     .content-text {
+//         font-weight: bold;
+//         font-size: 11px;
+//     }
+//     .content-sub {
+//         font-size: 15px;
+//     }
+// }
+
+// .modal-dialog {
+//   max-width: 15%;
+//   .modal-content {
+//     border: 0px solid rgba(0, 0, 0, 0.2) !important;
+//   }
+//   .modal-footer {
+//     border-top: 0px solid var(--light-border-grey) !important;
+//   }
+// }
+
+.center {
+    display: block;
+    text-align: center;
+}
+
+.user-add {
+    color: var(--wz-red);
+    cursor: pointer;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    //   color: var(--wizer-grey);
+}
+.table-responsive {
+    //   max-height: 20rem;
+    overflow-y: auto;
+    // height: 20rem;
+}
+
+.search-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0rem;
+  }
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    border: none;
+    background-color: #cbdec845;
+}
+.table tbody tr {
+    background-color: #cbdec845;
+    height: 5rem !important;
+    border-bottom: 0px solid transparent;
+}
+
+.table tbody tr:hover {
+    background-color: #cbdec86b;
+    cursor: pointer;
+}
+
+thead th:first-child {
+    border-radius: 10px 0 0 10px;
+}
+thead th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+tbody td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+tbody td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.amount {
+    text-align: right;
+}
+
+.evnName {
+    width: 25%;
+}
+
+// input[type="date"]::-webkit-calendar-picker-indicator {
+//   filter: invert(0.6) sepia(20%) saturate(1000%) grayscale(100%)
+//     hue-rotate(240deg);
+// }
+
+// .tr {
+//   height: 3rem;
+//   min-height: 3rem;
+// }
+
+.fr{
+    background-color: #1b3664 !important;
+    color: white;
+}
+
+
+.myPagination ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #1b3664 !important;
+    color: #fefefe;
+    cursor: default;
+}
+
+.table td,
+.table th {
+    padding: 1rem;
+    vertical-align: middle;
+    border-top: 0px solid #dee2e6;
+}
+
+.history-search-text {
+    border: none !important;
+    background-color: #cbdec845;
+    border-radius: 10px;
+}
+
+
+
+.red {
+    color: #cb5454;
+}
+.green {
+    color: #69b46e;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+    .table th {
+        text-align: center;
+    }
+
+    .search-section {
+        max-width: 100% !important;
+    }
+}
