@@ -26,6 +26,9 @@ import { MarketTableComponent } from './content/market-table/market-table.compon
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ContentFooterComponent } from './content/content/content-footer/content-footer.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { CommodityResolver } from './service/resolvers';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { ContentFooterComponent } from './content/content/content-footer/content
     SearchPipe,
     MarketTableComponent,
     ContentFooterComponent,
+    LandingPageComponent,
+    AdminPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,7 @@ import { ContentFooterComponent } from './content/content/content-footer/content
     NgxPaginationModule,
     FormsModule,
   ],
-  providers: [DataService],
+  providers: [DataService, CommodityResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
