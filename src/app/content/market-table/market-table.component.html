@@ -10,34 +10,37 @@
             <thead>
                 <tr>
                     <th class="fr" scope="col">COMODITY</th>
-                    <th class="amount" scope="col">PRICE (NGN)</th>
+                    <th class="amount" scope="col">PRICE (NGN / KG)</th>
                     <th class="amount" scope="col">CHANGE (%)</th>
-                    <th class="amount" scope="col">LAST WEEK (NGN)</th>
-                    <th class="amount" scope="col">LAST MONTH (NGN)</th>
+                    <!-- <th class="amount" scope="col">LAST WEEK (NGN / KG)</th> -->
+                    <th class="amount" scope="col">PREVIOUS PRICE (NGN / KG)</th>
                     <!-- <th scope="col"></th> -->
                 </tr>
             </thead>
-            <tbody id="myUL">
+            <tbody *ngIf="fxData.length != 0" id="myUL">
                 <tr class="tr" *ngFor="
                 let fx of fxData | searchPipe: filter | paginate: config;
                 let i = index;
               ">
                     <td class="fr">{{ fx.name.toUpperCase() }}</td>
                     <td class="amount">{{ fx.price | wz_naira_money_format}}</td>
-                    <td [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'" class="amount">{{
-                        fx.percentage_raise }}</td>
-                    <td class="amount">
+                    <td [ngClass]="fx.percentage == null || fx.percentage == '' ? 'black' : fx.percentage.toString().includes('-') ? 'red' : 'green'" class="amount">{{
+                        fx.percentage == null || fx.percentage == '' ? '-' : fx.percentage}}</td>
+                    <!-- <td class="amount">
                         {{ fx.price_week | wz_naira_money_format}}
-                    </td>
+                    </td> -->
                     <td class="amount">
                         {{ fx.price_month | wz_naira_money_format}}
                     </td>
                 </tr>
             </tbody>
         </table>
-        <pagination-controls *ngIf="fxData.length > 10" style="float: right; margin-top: 10px;" (pageChange)="pageChanged($event)" >
+        <pagination-controls *ngIf="fxData.length > 5" style="float: right; margin-top: 10px;"
+            (pageChange)="pageChanged($event)">
         </pagination-controls>
     </div>
+
+    <div *ngIf="fxData.length == 0" class="no-data">No Data yet</div>
 </div>
 
 

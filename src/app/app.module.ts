@@ -23,12 +23,14 @@ import {
   ThousandSuffixPipe,
 } from './service/custom.pipes';
 import { MarketTableComponent } from './content/market-table/market-table.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ContentFooterComponent } from './content/content/content-footer/content-footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CommodityResolver } from './service/resolvers';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { CommodityResolver } from './service/resolvers';
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [DataService, CommodityResolver],
   bootstrap: [AppComponent],

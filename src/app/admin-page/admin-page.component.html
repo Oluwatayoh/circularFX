@@ -1,14 +1,142 @@
-<div class="container">
-    <div class="row">
-        <h3>Commodity Update</h3>
-        <div class="btn-group">
-            <div class="signup-btn">
-                <i-feather name="plus-square" style="margin-right: 5px;"></i-feather>Get Started
+<section class="layout">
+    <div class="header">
+        <div class="navb">
+            <div class="logo">
+                <a href="#"><img src="assets/images/logo.png"></a>
             </div>
         </div>
     </div>
-    <div class="col-4"></div>
-    <div class="col-6">
+    <div class="container">
+        <div class="row">
+            <div class="action-b">
+                <h3>Commodities</h3>
+                <div class="btn-group">
+                    <div class="signup-btn" data-bs-toggle="modal" data-bs-target="#newCommodity" (click)="showNew()">
+                        <i-feather name="plus" style="margin-right: 5px;"></i-feather> New
+                    </div>
+                </div>
+            </div>
 
+            <div class="container" style="padding: 0px !important;">
+                <div class="search-section">
+                    <div class="col-4">
+                        <input id="searchInput" [(ngModel)]="filter"
+                            class="form-control form-control-bordered history-search-text" type="text"
+                            placeholder="search..." />
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="fr" scope="col">COMODITY</th>
+                                <th class="amount" scope="col">PRICE TODAY (NGN / KG)</th>
+                                <th class="amount" scope="col">CHANGE (%)</th>
+                                <!-- <th class="amount" scope="col">LAST WEEK (NGN)</th> -->
+                                <th class="amount" scope="col"> PREVIOUS PRICE (NGN / KG)</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="myUL">
+                            <tr class="tr" *ngFor="
+                            let fx of fxData | searchPipe: filter | paginate: config;
+                            let i = index;
+                          ">
+                                <td class="fr">{{ fx.name.toUpperCase() }}</td>
+                                <td class="amount">{{ fx.price == null || fx.price == 0 ? "-" : fx.price |
+                                    wz_naira_money_format}}</td>
+                                <td [ngClass]="fx.percentage == null || fx.percentage == '' ? 'black' : fx.percentage.toString().includes('-') ? 'red' : 'green'"
+                                    class="amount">
+                                    {{
+                                    fx.percentage == null || fx.percentage == 0 ? "-" : fx.percentage}}</td>
+                                <!-- <td class="amount">
+                                    {{ fx.price_week | wz_naira_money_format}}
+                                </td> -->
+
+                                <td class="amount">
+                                    {{ fx.price_month | wz_naira_money_format}} {{fx.price_month > 0 ? 'as at' : ''}} {{
+                                    fx.price_month > 0 ? fx.month : ''}}
+                                </td>
+                                <td>
+                                    <div class="action">
+                                        <i-feather name="edit" data-bs-toggle="modal" data-bs-target="#newCommodity"
+                                            (click)="showEdit(fx)"></i-feather>
+                                        <i-feather (click)="onDelete(fx)" name="trash-2"></i-feather>
+                                        <!-- <i-feather name="eye"></i-feather> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls *ngIf="fxData.length > 5" style="float: right; margin-top: 10px;"
+                        (pageChange)="pageChanged($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+
+
+            <!-- *ngIf="fxData.length > 10" -->
+        </div>
+        <div class="col-4"></div>
+        <div class="col-6">
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade " id="newCommodity" tabindex="-1" aria-labelledby="newCommodityLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCommodityLabel">New Commodity</h5>
+                <button type="button" id="closeModal" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <DIV class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name </label>
+                        <input type="text" required [(ngModel)]="saveComodityData.name" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price / Kg (NGN)</label>
+                        <input type="number" required [(ngModel)]="saveComodityData.price" class="form-control"
+                            id="price">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="percent" class="form-label">Percentage Change</label>
+                        <input type="number" disabled [(ngModel)]="saveComodityData.percentage" maxlength="3" min="0"
+                            max="100" class="form-control" id="percent">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="month" class="form-label">Select Month as at last Price</label>
+                        <select [(ngModel)]="saveComodityData.month" class="form-select">
+                            <option *ngFor="let m of monthData" [ngValue]="m">{{m}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price_month" class="form-label">Last Month Price / Kg (NGN)(Optional)</label>
+                        <input type="number" [(ngModel)]="saveComodityData.price_month" class="form-control"
+                            (ngModelChange)="valuechange($event)" id="price_month">
+                    </div>
+                </DIV>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeCModal" hidden
+                    data-bs-dismiss="modal">Close</button>
+                <div *ngIf="isEdit == false" class="btn-group" (click)="onSave()"
+                    style="width: 100%; justify-content: right;">
+                    <div class="signup-btn">Save
+                    </div>
+                </div>
+                <div *ngIf="isEdit" class="btn-group" (click)="onUpdate()" style="width: 100%; justify-content: right;">
+                    <div class="signup-btn">Update
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
     </div>
 </div>

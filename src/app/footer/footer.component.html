@@ -7,27 +7,29 @@
                     <ul class="highway-lane">
                         <li class="highway-car" *ngFor="let fx of fxData">
                             <div class="col-4">
-                                <h6 class="name" > {{fx.name}}</h6>
+                                <h6 class="name"> {{fx.name}}</h6>
                                 <div class="rw">
                                     <div class="price">{{fx.price | wz_naira_money_format}}</div>
-                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
-                                        class="percent">{{fx.percentage_raise}}%</div>
+                                    <div [ngClass]=" fx.percentage == null || fx.percentage == '' ? 'green' : fx.percentage.toString().includes('-') ? 'red' : 'green'"
+                                        class="percent">{{ fx.percentage == null || fx.percentage == '' ? '0' :
+                                        fx.percentage}}%</div>
                                 </div>
                             </div>
                         </li>
 
                         <li class="highway-car" *ngFor="let fx of fxData">
                             <div class="col-4">
-                                <h6 class="name" > {{fx.name}}</h6>
+                                <h6 class="name"> {{fx.name}}</h6>
                                 <div class="rw">
                                     <div class="price">{{fx.price | wz_naira_money_format}}</div>
-                                    <div [ngClass]="fx.percentage_raise.includes('-') ? 'red' : 'green'"
-                                        class="percent">{{fx.percentage_raise}}%</div>
+                                    <div [ngClass]="fx.percentage == null || fx.percentage == '' ? 'green' :fx.percentage.toString().includes('-') ? 'red' : 'green'"
+                                        class="percent">{{ fx.percentage == null || fx.percentage == '' ? '0' :
+                                        fx.percentage}}%</div>
                                 </div>
                             </div>
                         </li>
-                        
-                      
+
+
                     </ul>
                 </div>
             </div>

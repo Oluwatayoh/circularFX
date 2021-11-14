@@ -317,3 +317,12 @@ ul {
         }
     }
 }
+
+
+.modal-content{
+    border: none !important;
+    border-radius: 0.8rem !important;
+    .modal-header, .modal-footer{
+        border: none !important;
+    }
+}
