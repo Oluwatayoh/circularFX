@@ -1,5 +1,103 @@
 <div class="container">
     <!-- <div class="topic">CSS Vertical Tabs.</div> -->
+
+    <swiper [grabCursor]="true" [speed]="600" [pagination]="{
+        clickable: true
+      }" [parallax]="true" class="mySwiper">
+        <ng-template swiperSlide>
+            <div class="text-content-home">
+                <div class="home text" data-aos="zoom-out-down" data-aos-duration="10000">
+                    <div class="titl">Ferrous Metals</div>
+                    <p>Ferrous metals refer to any
+                        metal that contains iron. They
+                        are favoured for their tensile
+                        strength and durability, so are
+                        often utilised in housing
+                        construction, large-scale piping
+                        and industrial containers.</p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="text-content-blog">
+                <div class="blog text" data-aos="zoom-out-down" data-aos-duration="10000">
+                    <div class="titl">Non-Ferrous Metals</div>
+                    <p>Non-ferrous metals, on the
+                        other hand, don’t contain iron.
+                        They are much more malleable
+                        and lighter than ferrous metals,
+                        making them particularly suited
+                        for use where strength is
+                        required.
+                    </p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="text-content-help">
+                <div class="help text">
+                    <div class="titl">Rubber</div>
+                    <p>Rubber is a strong,
+                        waterproof, elastic substance
+                        made from the juice of a
+                        tropical tree or produced
+                        chemically. It is used for
+                        making tyres, boots, and other
+                        products.
+                    </p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="text-content-code">
+                <div class="code text">
+                    <div class="titl">Cellulose Products</div>
+                    <p>Cellulose is typically
+                        utilized in the
+                        manufacturing of paper
+                        and paperboard.</p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="text-content-about">
+                <div class="about text">
+                    <div class="titl">Glass</div>
+                    <p>Glass is an inorganic
+                        solid material that is
+                        usually transparent or
+                        translucent as well as
+                        hard, brittle, and
+                        impervious to the
+                        natural elements.
+                    </p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="text-content-plastic">
+                <div class="plastic text">
+                    <div class="titl">Plastics</div>
+                    <p>Plastics are a wide
+                        range of synthetic or
+                        semi-synthetic
+                        materials that use
+                        polymers as a main
+                        ingredient.
+                    </p>
+                </div>
+            </div>
+
+        </ng-template>
+    </swiper>
+
+
+
     <div class="content">
         <input type="radio" name="slider" checked id="home">
         <input type="radio" name="slider" id="blog">

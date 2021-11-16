@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+import SwiperCore, { EffectCards, Parallax, Pagination } from "swiper";
+
+SwiperCore.use([EffectCards, Parallax, Pagination]);
 
 @Component({
   selector: 'app-what-we-trade',
   templateUrl: './what-we-trade.component.html',
-  styleUrls: ['./what-we-trade.component.scss']
+  styleUrls: ['./what-we-trade.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class WhatWeTradeComponent implements OnInit {
 

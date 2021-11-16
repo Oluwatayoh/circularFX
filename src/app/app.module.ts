@@ -10,6 +10,7 @@ import { IconsModule } from './icons/icons.module';
 import { FooterComponent } from './footer/footer.component';
 import { DataService } from './service/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SwiperModule } from 'swiper/angular';
 
 import {
   DetermineDayPipe,
@@ -61,6 +62,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    SwiperModule,
     SweetAlert2Module.forRoot(),
   ],
   providers: [DataService, CommodityResolver],

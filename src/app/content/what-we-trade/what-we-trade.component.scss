@@ -1,5 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
+@import "~swiper/css";
+@import "~swiper/css/effect-cards";
+
+.swiper {
+    // padding: 10px;
+    display: none;
+}
+
+// .swiper-slide {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     border-radius: 18px;
+//     // font-size: 22px;
+//     font-weight: bold;
+//     // color: #fff;
+// }
+
 ::selection {
     background: #6d50e2;
     color: #fff;
@@ -127,7 +145,7 @@
     display: none;
 }
 
-.content-space{
+.content-space {
     height: 20rem;
 }
 
@@ -212,3 +230,93 @@
 //         border-radius: 30px;
 //     }
 // }
+
+@media only screen and (max-width: 699px) {
+    .content {
+        display: none;
+    }
+    .swiper {
+        display: block;
+        // height: 10rem;
+    }
+
+    .titl {
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .text-content-home {
+        background-image: url(../../../assets/images/ir.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        height: 100%;
+        .home {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+            transition: width 2s, height 4s;
+        }
+    }
+    .text-content-blog {
+        background-image: url(../../../assets/images/allu.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        .blog {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+        }
+    }
+    .text-content-help {
+        background-image: url(../../../assets/images/rb.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        .help {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+        }
+    }
+    .text-content-code {
+        background-image: url(../../../assets/images/paper.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        .code {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+        }
+    }
+    .text-content-about {
+        background-image: url(../../../assets/images/glas.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        .about {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+        }
+    }
+    .text-content-plastic {
+        background-image: url(../../../assets/images/plastic.jpg);
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
+        .plastic {
+            padding: 20px;
+            background-color: #daffebcc;
+            border-radius: 10px;
+        }
+    }
+}
