@@ -31,6 +31,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CommodityResolver } from './service/resolvers';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { ContactUsComponent } from './content/contact-us/contact-us.component';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ContentFooterComponent,
     LandingPageComponent,
     AdminPageComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SwiperModule,
     SweetAlert2Module.forRoot(),
   ],
-  providers: [DataService, CommodityResolver],
+  providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
