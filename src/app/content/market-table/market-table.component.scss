@@ -119,6 +119,18 @@ tbody td:last-child {
     .table th {
         text-align: center;
     }
+    table {
+        font-size: 10px;
+    }
+
+
+.table td,
+.table th {
+    padding: .5rem;
+}
+    .table tbody tr {
+        height: 0rem !important;
+    }
 
     .search-section {
         max-width: 100% !important;

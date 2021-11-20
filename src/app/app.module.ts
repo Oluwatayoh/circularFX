@@ -33,6 +33,7 @@ import { CommodityResolver } from './service/resolvers';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ContactUsComponent } from './content/contact-us/contact-us.component';
+import { OurServicesComponent } from './content/our-services/our-services.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ContactUsComponent } from './content/contact-us/contact-us.component';
     LandingPageComponent,
     AdminPageComponent,
     ContactUsComponent,
+    OurServicesComponent,
   ],
   imports: [
     BrowserModule,
