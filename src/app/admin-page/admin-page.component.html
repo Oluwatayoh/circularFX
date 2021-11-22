@@ -1,6 +1,3 @@
-
-
-
 <section class="layout">
     <div class="container">
         <div class="row">
@@ -14,22 +11,36 @@
             </div>
 
             <div class="container" style="padding: 0px !important;">
-                <div class="search-section">
+                <div class="search-section" style="justify-content: space-between;">
+                    <div class="col-4 country history-search-text">
+                        <!-- <label for="month" class="form-label">Select Country</label> -->
+                        <select [(ngModel)]="selectedCountry" (ngModelChange)="onChange($event)"
+                            class="form-select form-control form-control-bordered history-search-text">
+                            <option *ngFor="let m of countries" [ngValue]="m">{{m.name}}</option>
+                        </select>
+                        <img src="{{selectedCountry.flag}}" alt="">
+                    </div>
                     <div class="col-4">
                         <input id="searchInput" [(ngModel)]="filter"
                             class="form-control form-control-bordered history-search-text" type="text"
                             placeholder="search..." />
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="no-data" *ngIf="fxData.length == 0">
+                    <img src="assets/images/sorry.gif" alt="no data yet">
+                    <h4>Sorry, we have no data for {{selectedCountry.name}} yet.</h4>
+                </div>
+                <div *ngIf="fxData.length > 0" class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th class="fr" scope="col">COMODITY</th>
-                                <th class="amount" scope="col">PRICE TODAY (NGN / KG)</th>
+                                <th class="amount" scope="col">PRICE TODAY ({{selectedCountry.currency.symbol}} / KG)
+                                </th>
                                 <th class="amount" scope="col">CHANGE (%)</th>
                                 <!-- <th class="amount" scope="col">LAST WEEK (NGN)</th> -->
-                                <th class="amount" scope="col"> PREVIOUS PRICE (NGN / KG)</th>
+                                <th class="amount" scope="col"> PREVIOUS PRICE ({{selectedCountry.currency.symbol}} /
+                                    KG)</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -39,8 +50,7 @@
                             let i = index;
                           ">
                                 <td class="fr">{{ fx.name.toUpperCase() }}</td>
-                                <td class="amount">{{ fx.price == null || fx.price == 0 ? "-" : fx.price |
-                                    wz_naira_money_format}}</td>
+                                <td class="amount">{{ fx.price == null || fx.price == 0 ? "-" : fx.price}}</td>
                                 <td [ngClass]="fx.percentage == null || fx.percentage == '' ? 'black' : fx.percentage.toString().includes('-') ? 'red' : 'green'"
                                     class="amount">
                                     {{
@@ -50,7 +60,8 @@
                                 </td> -->
 
                                 <td class="amount">
-                                    {{ fx.price_month | wz_naira_money_format}} {{fx.price_month > 0 ? 'as at' : ''}} {{
+                                    {{selectedCountry.currency.symbol}}{{ fx.price_month}} {{fx.price_month > 0 ? 'as
+                                    at' : ''}} {{
                                     fx.price_month > 0 ? fx.month : ''}}
                                 </td>
                                 <td>
@@ -85,21 +96,31 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="newCommodityLabel">New Commodity</h5>
-                <button type="button" id="closeModal" class="btn-close" data-bs-dismiss="modal"
+                <button type="button" id="closeCModal"  class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <DIV class="needs-validation" novalidate>
+                    <!-- <div class="mb-3">
+                        <label for="month" class="form-label">Select Country</label>
+                        <select [(ngModel)]="saveComodityData.country" class="form-select">
+                            <option *ngFor="let m of countries" [ngValue]="m.name">{{m.name}}</option>
+                        </select>
+                    </div> -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Name </label>
                         <input type="text" required [(ngModel)]="saveComodityData.name" class="form-control" id="name">
                     </div>
                     <div class="mb-3">
-                        <label for="price" class="form-label">Price / Kg (NGN)</label>
+                        <label for="price" class="form-label">Price / Kg ({{selectedCountry.currency.code}})</label>
                         <input type="number" required [(ngModel)]="saveComodityData.price" class="form-control"
                             id="price">
                     </div>
-
+                    <div class="mb-3">
+                        <label for="price_month" class="form-label">Last Month Price / Kg ({{selectedCountry.currency.code}})(Optional)</label>
+                        <input type="number" [(ngModel)]="saveComodityData.price_month" class="form-control"
+                            (ngModelChange)="valuechange($event)" id="price_month">
+                    </div>
                     <div class="mb-3">
                         <label for="percent" class="form-label">Percentage Change</label>
                         <input type="number" disabled [(ngModel)]="saveComodityData.percentage" maxlength="3" min="0"
@@ -112,11 +133,7 @@
                             <option *ngFor="let m of monthData" [ngValue]="m">{{m}}</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="price_month" class="form-label">Last Month Price / Kg (NGN)(Optional)</label>
-                        <input type="number" [(ngModel)]="saveComodityData.price_month" class="form-control"
-                            (ngModelChange)="valuechange($event)" id="price_month">
-                    </div>
+
                 </DIV>
             </div>
             <div class="modal-footer">
@@ -135,4 +152,5 @@
             </div>
         </div>
     </div>
+    <!-- (ngModelChange)="onChange($event)" -->
 </div>

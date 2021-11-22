@@ -1,16 +1,28 @@
 <div class="container">
-    <div class="search-section">
+    <div class="search-section" style="justify-content: space-between;">
+        <div class="col-4 country history-search-text">
+            <select [(ngModel)]="selectedCountry"
+                class="form-select form-control form-control-bordered history-search-text"
+                (ngModelChange)="onChange($event)">
+                <option *ngFor="let c of countries" [ngValue]="c">{{c.name}} </option>
+            </select>
+            <img src="{{selectedCountry.flag}}" alt="">
+        </div>
         <div class="col-4">
             <input id="searchInput" [(ngModel)]="filter" class="form-control form-control-bordered history-search-text"
                 type="text" placeholder="search..." />
         </div>
     </div>
-    <div class="table-responsive">
+    <div class="no-data" *ngIf="fxData.length == 0">
+        <img src="assets/images/sorry.gif" alt="no data yet">
+        <h4>Sorry, we have no data for {{selectedCountry.name}} yet.</h4>
+    </div>
+    <div *ngIf="fxData.length > 0" class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th class="fr" scope="col">COMODITY</th>
-                    <th class="amount" scope="col">PRICE (NGN / KG)</th>
+                    <th class="amount" scope="col">PRICE ({{selectedCountry.currency.code}} / KG)</th>
                     <th class="amount" scope="col">CHANGE (%)</th>
                     <!-- <th class="amount" scope="col">LAST WEEK (NGN / KG)</th> -->
                     <th class="amount" scope="col">PREVIOUS PRICE (NGN / KG)</th>
@@ -23,14 +35,15 @@
                 let i = index;
               ">
                     <td class="fr">{{ fx.name.toUpperCase() }}</td>
-                    <td class="amount">{{ fx.price | wz_naira_money_format}}</td>
-                    <td [ngClass]="fx.percentage == null || fx.percentage == '' ? 'black' : fx.percentage.toString().includes('-') ? 'red' : 'green'" class="amount">{{
+                    <td class="amount">{{selectedCountry.currency.symbol}}{{ fx.price }}</td>
+                    <td [ngClass]="fx.percentage == null || fx.percentage == '' ? 'black' : fx.percentage.toString().includes('-') ? 'red' : 'green'"
+                        class="amount">{{
                         fx.percentage == null || fx.percentage == '' ? '-' : fx.percentage}}</td>
                     <!-- <td class="amount">
-                        {{ fx.price_week | wz_naira_money_format}}
+                        {{ fx.price_week }}
                     </td> -->
                     <td class="amount">
-                        {{ fx.price_month | wz_naira_money_format}}
+                        {{selectedCountry.currency.symbol}}{{ fx.price_month }}
                     </td>
                 </tr>
             </tbody>
@@ -40,7 +53,7 @@
         </pagination-controls>
     </div>
 
-    <div *ngIf="fxData.length == 0" class="no-data">No Data yet</div>
+    <!-- <div *ngIf="fxData.length == 0" class="no-data">No Data yet</div> -->
 </div>
 
 

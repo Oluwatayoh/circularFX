@@ -28,6 +28,17 @@
     overflow-y: auto;
 }
 
+.country {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+        width: 30px;
+        margin: 7px;
+        border-radius: 5px;
+    }
+}
+
 .search-section {
     display: flex;
     justify-content: flex-end;
@@ -123,11 +134,10 @@ tbody td:last-child {
         font-size: 10px;
     }
 
-
-.table td,
-.table th {
-    padding: .5rem;
-}
+    .table td,
+    .table th {
+        padding: 0.5rem;
+    }
     .table tbody tr {
         height: 0rem !important;
     }
