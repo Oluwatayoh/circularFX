@@ -145,6 +145,23 @@ ul {
     width: 25%;
     position: relative;
 }
+
+.btn-action {
+    // float: right;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: auto !important;
+    position: relative;
+margin: 5rem;
+    .signup-btn {
+        font-size: 15px !important; 
+        border-radius: 10px !important;
+        padding: 10px 40px !important;
+    }
+}
+
+
 .btnn {
     float: right;
     display: flex;

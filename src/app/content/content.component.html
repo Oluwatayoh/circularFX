@@ -1,59 +1,84 @@
 <div id="banner1" class="banner">
-    <div class="app-text">
-        <!-- <h3>airbnb for yatchting</h3> -->
-        <h1>Waste Collection and<br>Recycling</h1>
-        <p>In line with the vision of Circular FX which is to create a marketplace for the exchange of recyclable
-            materials and commodities, Circular FX will aggregate the price of recyclable materials based on the natural
-            market demand and supply by sourcing price data from franchisees and vendors serving as the market price.
-
-            Data of the daily rates are published on the Circular FX platform showing local market price and the foreign
-            market price of each country thereby allowing subscribers to make a comparative analysis on their best bet.
-        </p>
-    </div>
-    <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
-        <img src="assets/images/10.jpg">
-    </div>
-
+  <div class="app-text">
+    <!-- <h3>airbnb for yatchting</h3> -->
+    <h1>Waste Collection and<br />Recycling</h1>
+    <p>
+      In line with the vision of Circular FX which is to create a marketplace
+      for the exchange of recyclable materials and commodities, Circular FX will
+      aggregate the price of recyclable materials based on the natural market
+      demand and supply by sourcing price data from franchisees and vendors
+      serving as the market price. Data of the daily rates are published on the
+      Circular FX platform showing local market price and the foreign market
+      price of each country thereby allowing subscribers to make a comparative
+      analysis on their best bet.
+    </p>
+  </div>
+  <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
+    <img src="assets/images/10.jpg" />
+  </div>
 </div>
-
+<div class="btn-action btn-group center">
+  <div class="signup-btn" (click)="scrollFn('market_table')">
+    Check Market Data
+  </div>
+  <div class="signup-btn">Trade on CircularFX</div>
+  <div class="signup-btn">Finance a Purchase order</div>
+</div>
+<!-- <div>
+  <button (click)="scrollFn('market_table')">Check Market Data</button>
+  <button (click)="scrollFn('market_table')">Trade</button>
+  <button (click)="scrollFn('market_table')">Finace Purchase Order</button>
+</div> -->
 <div>
-    <br>
-    <br>
-    <div>
-        <app-what-we-trade></app-what-we-trade>
-    </div>
+  <br />
+  <br />
+  <div>
+    <app-what-we-trade></app-what-we-trade>
+  </div>
 
-    <div class="social-icons">
-        <ul>
-            <li><a href="#">
-                    <i-feather name="facebook"></i-feather>
-                </a></li>
-            <li><a href="#">
-                    <i-feather name="linkedin"></i-feather>
-                </a></li>
-            <li><a href="#">
-                    <i-feather name="instagram"></i-feather>
-                </a></li>
-            <li><a href="#">
-                    <i-feather name="twitter"></i-feather>
-                </a></li>
-        </ul>
-    </div>
+  <div class="social-icons">
+    <ul>
+      <li>
+        <a href="#">
+          <i-feather name="facebook"></i-feather>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i-feather name="linkedin"></i-feather>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i-feather name="instagram"></i-feather>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i-feather name="twitter"></i-feather>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<br>
-<br>
-<div class="title" style="text-align: center;">
+<br />
+<br />
+<section id="market_table">
+  <div class="title" style="text-align: center">
     <h2>Market Data</h2>
+  </div>
+  <br />
+
+  <app-market-table></app-market-table>
+</section>
+
+<br />
+<div class="title" style="text-align: center">
+  <h2>Contact Us</h2>
 </div>
-<br>
-<app-market-table></app-market-table>
-<br>
-<div class="title" style="text-align: center;">
-    <h2>Contact Us</h2>
-</div>
-<br>
+<br />
 <app-contact-us></app-contact-us>
 <div class="footer-container">
-    <app-content-footer></app-content-footer>
+  <app-content-footer></app-content-footer>
 </div>

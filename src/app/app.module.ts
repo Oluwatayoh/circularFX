@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DataService } from './service/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
+
 
 import {
   DetermineDayPipe,
@@ -34,6 +35,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ContactUsComponent } from './content/contact-us/contact-us.component';
 import { OurServicesComponent } from './content/our-services/our-services.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -65,9 +67,11 @@ import { OurServicesComponent } from './content/our-services/our-services.compon
     IconsModule,
     HttpClientModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     SwiperModule,
+    NgChartsModule,
     SweetAlert2Module.forRoot(),
   ],
   providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }],
