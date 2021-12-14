@@ -2,3 +2,19 @@
     position: relative;
     bottom: 60px;
 }
+
+@media only screen and (max-width: 699px) {
+    .btn-group {
+        flex-direction: column;
+    }
+    .signup-btn {
+        margin: 0.5rem;
+    }
+
+    .app-text p {
+        font-size: 14px;
+    }
+    .app-text h1 {
+        font-size: 40px;
+    }
+}

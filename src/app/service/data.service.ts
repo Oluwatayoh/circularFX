@@ -14,18 +14,18 @@ export class DataService {
   ) { }
 
   getData() {
-    return this.http.get<any>(`${this.baseUrl}fxData`);
+    return this.http.get<any>(`${this.baseUrl}commodity`);
   }
   saveComodity(data : any) {
-    return this.http.post<any>(`${this.baseUrl}fxData`, data);
+    return this.http.post<any>(`${this.baseUrl}commodity`, data);
   }
 
-  eidtComodity(data : any) {
-    return this.http.put<any>(`${this.baseUrl}fxData/${data.id}`, data);
+  eidtComodity(data : any, id:number) {
+    return this.http.put<any>(`${this.baseUrl}commodity/${id}`, data);
   }
 
   deleteComodity(id : any) {
-    return this.http.delete<any>(`${this.baseUrl}fxData/${id}`);
+    return this.http.delete<any>(`${this.baseUrl}commodity/${id}`);
   }
 
 }

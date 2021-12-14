@@ -1,10 +1,6 @@
-@import url("./../content/market-table/market-table.component.scss");
+@import url("./../content/market-table/market-table.scss");
 
 .container {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // height: 100vh;
     padding: 50px;
 }
 
@@ -66,4 +62,9 @@
         color: #1b3664;
         font-size: 16px;
     }
+}
+
+
+.new_commodity_wrap{
+    padding: 0rem 5rem;
 }

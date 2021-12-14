@@ -1,16 +1,29 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { data } from 'jquery';
-import { DataService } from '../service/data.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: 'app-trade',
+  templateUrl: './trade.component.html',
+  styleUrls: ['./trade.component.scss'],
+  animations: [
+    trigger('panelInOut', [
+      transition('void => *', [
+        style({ transform: 'translateY(-100%)' }),
+        animate(800),
+      ]),
+      transition('* => void', [
+        animate(800, style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
+  ],
 })
-export class FooterComponent implements OnInit {
-  fxData: any = [];
-
-  constructor(private dataService: DataService) {}
+export class TradeComponent implements OnInit {
+  commodities: any = [];
+  isToSell: boolean = false;
+  isToBuy: boolean = false;
+  showTrade: boolean = false;
+  filteredCommodities: any = [];
   countries: any = [
     {
       name: 'Nigeria',
@@ -159,37 +172,63 @@ export class FooterComponent implements OnInit {
       flag: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg',
     },
   ];
+  selectedCountry: any = {};
+  selectedCommodity: any = {};
+  buyData: any = {};
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.dataService.getData().subscribe((data) => {
-      // console.log(data);
-      let arr: any = [];
-      data.data.forEach((e: any) => {
-        let mValue: any;
-        mValue = e;
-        if (e.country != '' || e.country != null) {
-          var mCountry = this.countries.filter(
-            (c: any) => c.name.toLowerCase() === e.country.toLowerCase()
-          );
-          mValue.flag = mCountry[0].flag;
+    let com = this.route.snapshot.data['commodities'].data;
+    let arr: any = [];
+    com.forEach((e: any) => {
+      arr.push(e);
+      if (e.subCommodity.length != 0) {
+        for (var i = 0; i < e.subCommodity.length; i++) {
+          let initValue: any;
+          initValue = e.subCommodity[i];
+          initValue.country = e.country;
+          arr.push(initValue);
         }
-        arr.push(mValue);
-        if (mValue.subCommodity.length != 0) {
-          for (var i = 0; i < mValue.subCommodity.length; i++) {
-            let initValue: any;
-            initValue = mValue.subCommodity[i];
-            initValue.country = mValue.country;
-            initValue.flag = mValue.flag;
-            arr.push(initValue);
-          }
-        }
-      });
-      this.fxData = arr;
+      }
     });
+    this.commodities = arr;
+    this.selectedCountry = this.countries[0];
+    this.getCommodityData(this.selectedCountry.name);
+    this.buyData.quantity = 1;
+    this.buyData.total = this.buyData.quantity * this.selectedCommodity.price;
   }
 
-  getPercentageVal(d: String) {
-    return;
-    // console.log(val);
+  onShowTrade(id: number) {
+    this.showTrade = !this.showTrade;
+    if (id == 1) {
+      this.isToBuy = true;
+    } else if (id == 2) {
+      this.isToSell = true;
+    } else {
+      this.showTrade = false;
+      this.isToSell = false;
+      this.isToBuy = false;
+    }
+  }
+
+  onChange(country: string) {
+    this.selectedCountry = country;
+    this.getCommodityData(this.selectedCountry.name);
+  }
+  onQuantityChange(q: any) {
+    this.buyData.total = q * this.selectedCommodity.price;
+  }
+
+  onChangeCommodity(cm: any) {
+    this.selectedCommodity = cm;
+  }
+  getCommodityData(country: any) {
+    let countryData = this.commodities.filter(
+      (p: any) => p.country === country
+    );
+    this.filteredCommodities = countryData.sort(
+      (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
+    );
+    this.selectedCommodity = this.filteredCommodities[0];
   }
 }

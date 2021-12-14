@@ -15,6 +15,10 @@
     text-align: center;
 }
 
+.cont{
+    padding: 0 10rem;
+}
+
 .user-add {
     color: var(--wz-red);
     cursor: pointer;
@@ -30,7 +34,9 @@
 
 .country {
     display: flex;
+    background-color: #cbdec845;
     justify-content: space-between;
+    border-radius: 10px;
     align-items: center;
     img {
         width: 30px;
@@ -126,6 +132,7 @@ tbody td:last-child {
     border: none !important;
     background-color: #cbdec845;
     border-radius: 10px;
+    padding: 5px;
 }
 
 .red {
@@ -135,13 +142,6 @@ tbody td:last-child {
     color: #69b46e;
 }
 
-*,
-*:before,
-*:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 #tsum-tabs h1 {
     padding: 50px 0;

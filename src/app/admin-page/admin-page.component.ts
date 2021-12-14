@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../service/data.service';
 import Swal from 'sweetalert2';
 import { ViewChild, ElementRef } from '@angular/core';
@@ -9,12 +9,25 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { animate, style, transition, trigger } from '@angular/animations';
 declare var $: any;
 
 @Component({
+  // encapsulation: ViewEncapsulation.None,
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
+  animations: [
+    trigger('panelInOut', [
+      transition('void => *', [
+        style({ transform: 'translateY(-100%)' }),
+        animate(800),
+      ]),
+      transition('* => void', [
+        animate(800, style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class AdminPageComponent implements OnInit {
   @ViewChild('closeCModal') closeModal: any;
@@ -22,6 +35,7 @@ export class AdminPageComponent implements OnInit {
   saveComodityData: any = {};
   fxData: any = [];
   monthData: any = [];
+  showSub: boolean = false;
   filter: string = '';
   config: any;
   isEdit: boolean = false;
@@ -182,31 +196,39 @@ export class AdminPageComponent implements OnInit {
     };
   }
 
+  showClass(fx: any) {
+    if (fx.subCommodity != 0) {
+      this.showSub = !this.showSub;
+    } else {
+      this.showSub = false;
+    }
+  }
+
   creatForm() {
     this.form = this.fb.group({
       name: [null],
       month: [null],
-      country: [null],
+      country: [this.selectedCountry.name],
       price: [null],
-      percentage: [null],
+      percentage: [null, { disabled: true }],
       price_month: [null],
-      subCommodity: this.fb.array([this.subCatFrom()]),
+      subCommodity: this.fb.array([]),
     });
   }
 
-  subCatFrom() {
+  subCatFrom(): FormGroup {
     return this.fb.group({
       name: [null],
       price: [null],
-      percentage: [null],
+      percentage: [null, { disabled: true }],
       price_month: [null],
     });
   }
 
-  get sub() {
+  get sub(): FormArray {
     return this.form.get('subCommodity') as FormArray;
   }
- 
+
   addNewContacts() {
     this.sub.push(this.subCatFrom());
   }
@@ -222,7 +244,6 @@ export class AdminPageComponent implements OnInit {
   getCommodityData(country: any) {
     this.dataService.getData().subscribe((data) => {
       let countryData = data.data.filter((p: any) => p.country === country);
-
       this.fxData = countryData.sort(
         (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
       );
@@ -232,7 +253,7 @@ export class AdminPageComponent implements OnInit {
   onChange(country: string) {
     this.selectedCountry = country;
     this.getCommodityData(this.selectedCountry.name);
-    this.saveComodityData.country = this.selectedCountry.name;
+    this.form.controls['country'].setValue(this.selectedCountry.name);
   }
 
   ngOnInit(): void {
@@ -261,16 +282,53 @@ export class AdminPageComponent implements OnInit {
   }
 
   valuechange(i: number): void {
-    this.saveComodityData.percentage = this.getPercentageChange(
-      i,
-      this.saveComodityData.price
+    this.form.controls['percentage'].patchValue(
+      this.getPercentageChange(i, this.form.get('price')?.value)
     );
+  }
+
+  valuechange2(i: number, idx: number): void {
+    const price = (
+      (this.form.get('subCommodity') as FormArray).at(idx) as FormGroup
+    ).get('price')?.value;
+    ((this.form.get('subCommodity') as FormArray).at(idx) as FormGroup)
+      .get('percentage')
+      ?.patchValue(this.getPercentageChange(i, price));
   }
 
   showEdit(data: any) {
     this.saveComodityData = data;
+    console.log(this.saveComodityData);
     this.isEdit = true;
+    this.form.patchValue({
+      name: this.saveComodityData.name,
+      month: this.saveComodityData.month,
+      country: this.saveComodityData.country,
+      price: this.saveComodityData.price,
+      percentage: this.saveComodityData.percentage,
+      price_month: this.saveComodityData.price_month,
+    });
+    this.form.setControl(
+      'subCommodity',
+      this.setExistingData(data.subCommodity)
+    );
   }
+
+  setExistingData(sub: any): FormArray {
+    const formArray = new FormArray([]);
+    sub.forEach((e: any) => {
+      formArray.push(
+        this.fb.group({
+          name: e.name,
+          price: e.price,
+          percentage: e.percentage,
+          price_month: e.price_month,
+        })
+      );
+    });
+    return formArray;
+  }
+
   showNew() {
     this.saveComodityData = {};
     this.isEdit = false;
@@ -287,18 +345,24 @@ export class AdminPageComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.dataService.deleteComodity(data.id).subscribe((data) => {
-          this.getCommodityData(this.selectedCountry);
+        this.dataService.deleteComodity(data._id).subscribe((data) => {
+          if (data.success == true) {
+            this.getCommodityData(this.selectedCountry);
+            Swal.fire('Deleted!', data.message, 'success');
+          }else{
+            Swal.fire('Error!', data.message, 'error');
+          }
         });
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
   }
 
   onUpdate() {
     if (
-      this.saveComodityData.name == null ||
-      this.saveComodityData.price == null
+      this.form.get('name')?.value == null ||
+      this.form.get('name')?.value == '' ||
+      this.form.get('price')?.value == null ||
+      this.form.get('price')?.value == ''
     ) {
       Swal.fire({
         title: 'Validation!',
@@ -311,47 +375,53 @@ export class AdminPageComponent implements OnInit {
     Swal.fire('', 'Please Wait...');
     Swal.showLoading();
 
-    this.saveComodityData.percentage =
-      this.saveComodityData.price_month != null ||
-      this.saveComodityData.price_month != ''
+    // this.saveComodityData.country = this.selectedCountry.name;
+
+    this.form.controls['percentage'].setValue(
+      this.form.get('price_month')?.value != null ||
+        this.form.get('price_month')?.value != ''
         ? this.getPercentageChange(
-            this.saveComodityData.price_month,
-            this.saveComodityData.price
+            this.form.get('price_month')?.value,
+            this.form.get('price')?.value
           )
-        : 0;
-    this.saveComodityData.price_month == null
-      ? (this.saveComodityData.price_month = 0)
-      : this.saveComodityData.price_month;
-    console.log(this.saveComodityData.month);
-    this.dataService.eidtComodity(this.saveComodityData).subscribe((data) => {
-      if (data.id != null) {
-        Swal.close();
-        Swal.fire({
-          title: 'Successful!',
-          text: 'Comodity Updated successfully',
-          icon: 'success',
-          showConfirmButton: true,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.getCommodityData(this.selectedCountry.name);
-            this.closeModal.nativeElement.click();
-            // document.getElementById("closeModalButton").click();
-            // $("#newCommodity .close").toggle()
-            // $('#newCommodity').modal().hide();
-            // $('#newCommodity').hide;
-          }
-        });
-      }
-      console.log(data);
-    });
+        : 0
+    );
+    this.form.get('price_month')?.value == null
+      ? this.form.controls['price_month'].setValue(0)
+      : this.form.get('price_month')?.value;
+    this.dataService
+      .eidtComodity(this.form.value, this.saveComodityData._id)
+      .subscribe((data) => {
+        if (data.success == true) {
+          Swal.close();
+          Swal.fire({
+            title: 'Successful!',
+            text: 'Comodity Updated successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getCommodityData(this.selectedCountry.name);
+              this.closeModal.nativeElement.click();
+              // document.getElementById("closeModalButton").click();
+              // $("#newCommodity .close").toggle()
+              // $('#newCommodity').modal().hide();
+              // $('#newCommodity').hide;
+            }
+          });
+        }
+        console.log(data);
+      });
   }
 
   onSave() {
     if (
-      this.saveComodityData.name == null ||
-      this.saveComodityData.price == null
+      this.form.get('name')?.value == null ||
+      this.form.get('name')?.value == '' ||
+      this.form.get('price')?.value == null ||
+      this.form.get('price')?.value == ''
     ) {
       Swal.fire({
         title: 'Validation!',
@@ -364,21 +434,22 @@ export class AdminPageComponent implements OnInit {
     Swal.fire('', 'Please Wait...');
     Swal.showLoading();
 
-    this.saveComodityData.country = this.selectedCountry.name;
-    this.saveComodityData.percentage =
-      this.saveComodityData.price_month != null ||
-      this.saveComodityData.price_month != ''
+    // this.saveComodityData.country = this.selectedCountry.name;
+
+    this.form.controls['percentage'].setValue(
+      this.form.get('price_month')?.value != null ||
+        this.form.get('price_month')?.value != ''
         ? this.getPercentageChange(
-            this.saveComodityData.price_month,
-            this.saveComodityData.price
+            this.form.get('price_month')?.value,
+            this.form.get('price')?.value
           )
-        : 0;
-    this.saveComodityData.price_month == null
-      ? (this.saveComodityData.price_month = 0)
-      : this.saveComodityData.price_month;
-    console.log(this.saveComodityData.month);
-    this.dataService.saveComodity(this.saveComodityData).subscribe((data) => {
-      if (data.id != null) {
+        : 0
+    );
+    this.form.get('price_month')?.value == null
+      ? this.form.controls['price_month'].setValue(0)
+      : this.form.get('price_month')?.value;
+    this.dataService.saveComodity(this.form.value).subscribe((data) => {
+      if (data.success == true) {
         Swal.close();
         Swal.fire({
           title: 'Successful!',
@@ -391,10 +462,6 @@ export class AdminPageComponent implements OnInit {
           if (result.isConfirmed) {
             this.getCommodityData(this.selectedCountry.name);
             this.closeModal.nativeElement.click();
-            // document.getElementById("closeModalButton").click();
-            // $("#newCommodity .close").toggle()
-            // $('#newCommodity').modal().hide();
-            // $('#newCommodity').hide;
           }
         });
       }

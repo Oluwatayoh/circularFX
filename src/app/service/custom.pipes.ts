@@ -13,7 +13,7 @@ export class MoneyFormat implements PipeTransform {
 export class MoneyFormatInNaira implements PipeTransform {
   transform(value: any): any {
     if (!value) return '-';
-    return '₦' + parseFloat(value + '').toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+    return parseFloat(value + '').toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
   }
 }
 
@@ -59,6 +59,7 @@ export class PhoneNumberPipe implements PipeTransform {
     return value;
   }
 }
+
 
 @Pipe({ name: 'wz_thousand_suffix' })
 export class ThousandSuffixPipe implements PipeTransform {

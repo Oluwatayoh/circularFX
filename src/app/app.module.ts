@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,7 +9,7 @@ import { WhatWeTradeComponent } from './content/what-we-trade/what-we-trade.comp
 import { IconsModule } from './icons/icons.module';
 import { FooterComponent } from './footer/footer.component';
 import { DataService } from './service/data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
 
 
@@ -36,6 +36,9 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ContactUsComponent } from './content/contact-us/contact-us.component';
 import { OurServicesComponent } from './content/our-services/our-services.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ChartComponent } from './content/market-table/chart/chart.component';
+import { TradeComponent } from './trade/trade.component';
+import { HttpConfigInterceptor } from './service/interceptor';
 
 
 @NgModule({
@@ -60,6 +63,8 @@ import { NgChartsModule } from 'ng2-charts';
     AdminPageComponent,
     ContactUsComponent,
     OurServicesComponent,
+    ChartComponent,
+    TradeComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,8 @@ import { NgChartsModule } from 'ng2-charts';
     NgChartsModule,
     SweetAlert2Module.forRoot(),
   ],
-  providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }],
+  providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }, 
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

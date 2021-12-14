@@ -63,17 +63,31 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody id="myUL">
-              <tr
-                class="tr"
-                *ngFor="
-                  let fx of fxData | searchPipe: filter | paginate: config;
-                  let i = index
-                "
-              >
-                <td class="fr">{{ fx.name.toUpperCase() }}</td>
+            <tbody
+              id="myUL"
+              *ngFor="
+                let fx of fxData | searchPipe: filter | paginate: config;
+                let i = index
+              "
+            >
+              <tr class="tr">
+                <td class="fr">
+                  <div class="name_sub" (click)="showClass(fx)">
+                    {{ fx.name.toUpperCase() }}
+                    <div
+                      *ngIf="fx.subCommodity && fx.subCommodity != 0"
+                      class="chevron"
+                    >
+                      <i-feather *ngIf="showSub" name="chevron-up"></i-feather>
+                      <i-feather
+                        *ngIf="!showSub"
+                        name="chevron-down"
+                      ></i-feather>
+                    </div>
+                  </div>
+                </td>
                 <td class="amount">
-                  {{ fx.price == null || fx.price == 0 ? "-" : fx.price }}
+                  {{ selectedCountry.currency.symbol }}{{ fx.price == null || fx.price == 0 ? "-" : fx.price | wz_naira_money_format}}
                 </td>
                 <td
                   [ngClass]="
@@ -96,7 +110,7 @@
                                 </td> -->
 
                 <td class="amount">
-                  {{ selectedCountry.currency.symbol }}{{ fx.price_month }}
+                  {{ selectedCountry.currency.symbol }}{{ fx.price_month | wz_naira_money_format}}
                   {{
                     fx.price_month > 0
                       ? "as
@@ -121,6 +135,40 @@
                   </div>
                 </td>
               </tr>
+              <thead
+                class="tr"
+                *ngIf="!showSub"
+                [@panelInOut]
+              >
+                <tr class="tr" *ngFor="let cl of fx.subCommodity">
+                  <th class="fr">{{ cl.name.toUpperCase() }}</th>
+                  <td class="amount">
+                    {{ selectedCountry.currency.symbol }}{{ cl.price }}
+                  </td>
+                  <td
+                    [ngClass]="
+                      cl.percentage == null || cl.percentage == ''
+                        ? 'black'
+                        : cl.percentage.toString().includes('-')
+                        ? 'red'
+                        : 'green'
+                    "
+                    class="amount"
+                  >
+                    {{
+                      cl.percentage == null || cl.percentage == ""
+                        ? "-"
+                        : cl.percentage
+                    }}
+                  </td>
+                  <!-- <td class="amount">
+                                  {{ fx.price_week }}
+                              </td> -->
+                  <td class="amount">
+                    {{ selectedCountry.currency.symbol }}{{ cl.price_month }}
+                  </td>
+                </tr>
+              </thead>
             </tbody>
           </table>
           <pagination-controls
@@ -152,6 +200,7 @@
         <h5 class="modal-title" id="newCommodityLabel">New Commodity</h5>
         <button
           type="button"
+          (click)="creatForm()"
           id="closeCModal"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -220,7 +269,7 @@
               >Select Month as at last Price</label
             >
             <select formControlName="month" class="form-select">
-              <option *ngFor="let m of monthData" value="m">{{ m }}</option>
+              <option *ngFor="let m of monthData" [value]="m">{{ m }}</option>
             </select>
           </div>
 
@@ -228,7 +277,7 @@
             <label for="class" class="form-label">Sub Category</label>
             <div
               class="form-array"
-              formArrayName="sub"
+              formArrayName="subCommodity"
               *ngFor="let o of sub.controls; index as idx; last as isLast"
             >
               <div class="sub_cat" [formGroupName]="idx">
@@ -267,6 +316,7 @@
                     type="number"
                     formControlName="price_month"
                     class="form-control"
+                    (ngModelChange)="valuechange2($event, idx)"
                     id="price_month"
                   />
                 </div>
@@ -286,8 +336,8 @@
                 </div>
               </div>
             </div>
-            <div class="add">
-              <i-feather (click)="addNewContacts()" name="plus"> </i-feather>
+            <div class="add" (click)="addNewContacts()">
+              <i-feather name="plus"> </i-feather>
               Add
             </div>
             <!-- <div class="primary" >

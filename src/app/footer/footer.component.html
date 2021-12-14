@@ -1,39 +1,103 @@
 <div class="liveDataContainer">
-    <div class="liveDataTitle">Live Market Prices</div>
-    <div class="liveData">
-        <section class="slide-option">
-            <div id="infinite" class="highway-slider">
-                <div class="container highway-barrier">
-                    <ul class="highway-lane">
-                        <li class="highway-car" *ngFor="let fx of fxData">
-                            <div class="col-4">
-                                <h6 class="name"> {{fx.name}}</h6>
-                                <div class="rw">
-                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
-                                    <div [ngClass]=" fx.percentage == null || fx.percentage == '' ? 'green' : fx.percentage.toString().includes('-') ? 'red' : 'green'"
-                                        class="percent">{{ fx.percentage == null || fx.percentage == '' ? '0' :
-                                        fx.percentage}}%</div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="highway-car" *ngFor="let fx of fxData">
-                            <div class="col-4">
-                                <h6 class="name"> {{fx.name}}</h6>
-                                <div class="rw">
-                                    <div class="price">{{fx.price | wz_naira_money_format}}</div>
-                                    <div [ngClass]="fx.percentage == null || fx.percentage == '' ? 'green' :fx.percentage.toString().includes('-') ? 'red' : 'green'"
-                                        class="percent">{{ fx.percentage == null || fx.percentage == '' ? '0' :
-                                        fx.percentage}}%</div>
-                                </div>
-                            </div>
-                        </li>
-
-
-                    </ul>
+  <div class="liveDataTitle">Live Market Prices</div>
+  <div class="liveData">
+    <section class="slide-option">
+      <div id="infinite" class="highway-slider">
+        <div class="container highway-barrier">
+          <ul class="highway-lane col-2">
+            <li class="highway-car col-2" *ngFor="let fx of fxData">
+              <div class="col-2">
+                <div class="rw">
+                  <h6 class="name">{{ fx.name }}</h6>
+                  <img src="{{ fx.flag }}" alt="" />
                 </div>
-            </div>
-        </section>
-    </div>
 
+                <div class="rw">
+                  <div class="price">
+                    {{ fx.price | wz_naira_money_format }}
+                  </div>
+                  <div
+                    [ngClass]="
+                      fx.percentage == null || fx.percentage == ''
+                        ? 'green'
+                        : fx.percentage.toString().includes('-')
+                        ? 'red'
+                        : 'green'
+                    "
+                    class="percent"
+                  >
+                    {{
+                      fx.percentage == null || fx.percentage == ""
+                        ? "0"
+                        : fx.percentage
+                    }}%
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="highway-car col-2" *ngFor="let fx of fxData">
+              <div class="col-2">
+                <div class="rw">
+                  <h6 class="name">{{ fx.name }}</h6>
+                  <img src="{{ fx.flag }}" alt="" />
+                </div>
+
+                <div class="rw">
+                  <div class="price">
+                    {{ fx.price | wz_naira_money_format }}
+                  </div>
+                  <div
+                    [ngClass]="
+                      fx.percentage == null || fx.percentage == ''
+                        ? 'green'
+                        : fx.percentage.toString().includes('-')
+                        ? 'red'
+                        : 'green'
+                    "
+                    class="percent"
+                  >
+                    {{
+                      fx.percentage == null || fx.percentage == ""
+                        ? "0"
+                        : fx.percentage
+                    }}%
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="highway-car col-2" *ngFor="let fx of fxData">
+              <div class="col-2">
+                <div class="rw">
+                  <h6 class="name">{{ fx.name }}</h6>
+                  <img src="{{ fx.flag }}" alt="" />
+                </div>
+
+                <div class="rw">
+                  <div class="price">
+                    {{ fx.price | wz_naira_money_format }}
+                  </div>
+                  <div
+                    [ngClass]="
+                      fx.percentage == null || fx.percentage == ''
+                        ? 'green'
+                        : fx.percentage.toString().includes('-')
+                        ? 'red'
+                        : 'green'
+                    "
+                    class="percent"
+                  >
+                    {{
+                      fx.percentage == null || fx.percentage == ""
+                        ? "0"
+                        : fx.percentage
+                    }}%
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

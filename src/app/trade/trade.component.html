@@ -1,0 +1,176 @@
+<app-header></app-header>
+
+<div class="service-wrap" *ngIf="!showTrade" [@panelInOut]>
+  <img class="demo-bg" src="assets/images/10.jpg" alt="" />
+  <section class="services">
+    <div class="s-heading">
+      <h1>Trade with<font color="#148d44"> Us</font>.</h1>
+    </div>
+    <div class="s-box-container">
+      <div class="s-box" (click)="onShowTrade(1)">
+        <div class="bar"></div>
+        <img alt="1" src="assets/images/fund.png" />
+        <h1>Buy</h1>
+        <p>Buy Commodities from our platform at best rate ever</p>
+      </div>
+      <div class="s-box" (click)="onShowTrade(2)">
+        <div class="bar"></div>
+        <img alt="2" src="assets/images/market.png" />
+        <h1>Sell</h1>
+        <p>Sell at your convenience</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="service-wrap" *ngIf="showTrade" [@panelInOut]>
+  <img class="demo-bg" src="assets/images/10.jpg" alt="" />
+  <section class="services">
+    <div class="s-heading">
+      <h1 *ngIf="isToBuy">Buy</h1>
+      <h1 *ngIf="isToSell">Sell</h1>
+      <p>please fill in the details below!</p>
+    </div>
+
+    <div class="container">
+      <div class="bck col-2" (click)="onShowTrade(0)">
+        <i-feather name="arrow-left-circle"></i-feather>
+        <div>Back to trade</div>
+      </div>
+      <div class="search-section" style="justify-content: space-between">
+        <div class="col-4 country history-search">
+          <!-- <label for="month" class="form-label">Select Country</label> -->
+          <select
+            [(ngModel)]="selectedCountry"
+            (ngModelChange)="onChange($event)"
+            class="
+              form-select form-control form-control-bordered
+              history-search-text
+            "
+          >
+            <option *ngFor="let m of countries" [ngValue]="m">
+              {{ m.name }}
+            </option>
+          </select>
+          <img src="{{ selectedCountry.flag }}" alt="" />
+        </div>
+
+        <div class="col-4 country history-search">
+          <select
+            [(ngModel)]="selectedCommodity"
+            (ngModelChange)="onChangeCommodity($event)"
+            class="
+              form-select form-control form-control-bordered
+              history-search-text
+            "
+          >
+            <option *ngFor="let c of filteredCommodities" [ngValue]="c">
+              {{ c.name | sentenceCase }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="no-data" *ngIf="filteredCommodities.length == 0">
+        <img src="assets/images/sorry.gif" alt="no data yet" />
+        <h4>Sorry, we have no data for {{ selectedCountry.name }} yet.</h4>
+      </div>
+      <div class="com" *ngIf="filteredCommodities.length != 0">
+        <div class="com-details col-4">
+          <small class="small">{{ selectedCountry.currency.symbol }}</small>
+          <h1 class="h1">
+            {{ selectedCommodity.price | wz_naira_money_format }}
+          </h1>
+          <br />
+          <small class="small-2">Previous Price</small>
+          <h1 class="h2">
+            {{ selectedCountry.currency.symbol }}
+            {{ selectedCommodity.price_month | wz_naira_money_format }}
+          </h1>
+          <br />
+          <small class="small-2">Percentage Change</small>
+          <h1
+            [ngClass]="
+              selectedCommodity.percentage == null ||
+              selectedCommodity.percentage == ''
+                ? 'black'
+                : selectedCommodity.percentage.toString().includes('-')
+                ? 'red'
+                : 'green'
+            "
+          >
+            {{ selectedCommodity.percentage }}%
+          </h1>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="mb-3 history-search">
+              <label for="name" class="form-label">Full Name </label>
+              <input
+                type="text"
+                required
+                [(ngModel)]="buyData.name"
+                class="form-control history-search-text"
+                id="name"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="phone" class="form-label">Phone </label>
+              <input
+                type="number"
+                required
+                [(ngModel)]="buyData.phone"
+                class="form-control history-search-text"
+                id="phone"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="mail" class="form-label">E-Mail </label>
+              <input
+                type="email"
+                required
+                [(ngModel)]="buyData.mail"
+                class="form-control history-search-text"
+                id="mail"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="address" class="form-label">Address </label>
+              <textarea
+                type="text"
+                required
+                [(ngModel)]="buyData.address"
+                class="form-control history-search-text"
+                id="address"
+              ></textarea>
+            </div>
+            <div class="mb-3 history-search">
+              <label for="quantity" class="form-label">Quantity / kg</label>
+              <input
+                type="number"
+
+                required
+                [(ngModel)]="buyData.quantity"
+                (ngModelChange)="onQuantityChange($event)"
+                class="form-control history-search-text"
+                id="quantity"
+              />
+            </div>
+            <div class="row-btm">
+              <div class="total">
+                <small class="small">{{
+                  selectedCountry.currency.symbol
+                }}</small>
+                <h1 class="h2">
+                  {{ buyData.total | wz_naira_money_format }}
+                </h1>
+              </div>
+              <div class="btn-group">
+                <div class="signup-btn">Proceed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

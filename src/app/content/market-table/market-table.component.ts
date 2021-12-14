@@ -1,25 +1,28 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
-import { ChartData, ChartType } from 'chart.js';
+import { ChartComponent } from './chart/chart.component';
 
 @Component({
   selector: 'app-market-table',
   templateUrl: './market-table.component.html',
-  styleUrls: ['./market-table.component.scss'],
+  styleUrls: ['./market-table.scss'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
-        style({opacity:0}),
-        animate(500, style({opacity:1})) 
-      ]),
-      transition(':leave', [   // :leave is alias to '* => void'
-        animate(500, style({opacity:0})) 
-      ])
+    trigger('panelInOut', [
+        transition('void => *', [
+            style({transform: 'translateY(-100%)'}),
+            animate(800)
+        ]),
+        transition('* => void', [
+            animate(800, style({transform: 'translateY(-100%)'}))
+        ])
     ])
-  ]
+]
 })
+
 export class MarketTableComponent implements OnInit {
+  @ViewChild(ChartComponent, {static: true}) child! : ChartComponent;
+  
   showSub: boolean = false;
   fxData: any = [];
   countries: any = [
@@ -195,16 +198,16 @@ export class MarketTableComponent implements OnInit {
 
   getCommodityData(country: string) {
     this.dataService.getData().subscribe((data) => {
-      console.log('>>>>>>', data);
-      let countryData = data.filter((p: any) => p.country === country);
+      let countryData = data.data.filter((p: any) => p.country === country);
       this.fxData = countryData.sort(
         (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
       );
+      console.log(this.child)
     });
   }
 
   showClass(fx: any) {
-    if (fx.class != 0) {
+    if (fx.subCommodity != 0) {
       this.showSub = !this.showSub;
     } else {
       this.showSub = false;
@@ -218,55 +221,13 @@ export class MarketTableComponent implements OnInit {
     // });
     this.selectedCountry = this.countries[0];
     this.getCommodityData(this.selectedCountry.name);
+   console.log(this.child)
   }
 
 
-  // PolarArea
-  public polarAreaChartLabels: string[] = [
-    'Download Sales',
-    'In-Store Sales',
-    'Mail Sales',
-    'Telesales',
-    'Corporate Sales',
-  ];
-  public polarAreaChartData: ChartData<'polarArea'> = {
-    labels: this.polarAreaChartLabels,
-    datasets: [
-      {
-        data: [300, 500, 100, 40, 120],
-        label: 'Series 1',
-      },
-    ],
-  };
-  public polarAreaLegend = true;
-
-  public polarAreaChartType: ChartType = 'polarArea';
-
-  // events
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event: MouseEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event: MouseEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
-  }
-
-
-
-  // getPercentageChange(oldNumber: any, newNumber: any) {
-  //   var decreaseValue = oldNumber - newNumber;
-  //   return Math.round((decreaseValue / oldNumber) * 100);
-  // }
+ngAfterViewInit() {
+    console.log('on after view init', this.child);
+    // this returns null
+}
+  
 }

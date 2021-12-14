@@ -4,21 +4,27 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { OurServicesComponent } from './content/our-services/our-services.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CommodityResolver } from './service/resolvers';
+import { TradeComponent } from './trade/trade.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: LandingPageComponent },
   { path: 'services', component: OurServicesComponent },
   {
-    path: 'admin', component: AdminPageComponent,
+    path: 'trade',
+    component: TradeComponent,
     resolve: {
-      // resetPassword: CommodityResolver,
+      commodities: CommodityResolver,
     },
+  },
+  {
+    path: 'admin',
+    component: AdminPageComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

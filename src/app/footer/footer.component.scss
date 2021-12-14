@@ -39,6 +39,12 @@
         font-weight: 900 !important;
         margin-right: 30px;
     }
+    img {
+        width: 30px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
 }
 
 .name{
@@ -97,9 +103,10 @@ div.highway-slider {
 }
 #stffull div.highway-barrier {
     ul.highway-lane {
-        width: 500%;
+        // width: 500%;
         li.highway-car {
             animation: translatestf 30s linear infinite;
+            animation-iteration-count:infinite;
             h4 {
                 font-size: 28px;
             }
@@ -134,10 +141,13 @@ div.highway-slider {
         background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
     }
     ul.highway-lane {
-        width: calc(180px * 24);
+        // width: calc(180px * 24);
+        display: flex;
+        justify-content: space-between;
         li.highway-car {
-            width: 180px;
+            min-width: 300px;
             animation: translateinfinite 25s linear infinite;
+            animation-iteration-count:infinite;
             span.fab {
                 font-size: 65px;
             }
