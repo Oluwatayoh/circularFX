@@ -175,6 +175,8 @@ export class TradeComponent implements OnInit {
   selectedCountry: any = {};
   selectedCommodity: any = {};
   buyData: any = {};
+  sellData: any = {};
+  images: any = [];
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -230,5 +232,26 @@ export class TradeComponent implements OnInit {
       (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
     );
     this.selectedCommodity = this.filteredCommodities[0];
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        var reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          console.log(event.target.result);
+          this.images.push(event.target.result);
+        };
+
+        reader.readAsDataURL(event.target.files[i]);
+      }
+    }
+  }
+
+  removeImage(url: any) {
+    console.log(this.images, url);
+    this.images = this.images.filter((img: any) => img != url);
   }
 }

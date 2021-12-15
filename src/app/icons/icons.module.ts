@@ -15,7 +15,7 @@ import {
   ChevronUp,
   PlusCircle,
   Minus,
-  Plus,
+  Plus,XCircle
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -32,7 +32,7 @@ const icons = {
   ArrowLeftCircle,
   ChevronDown,
   ChevronUp,
-  Minus,
+  Minus,XCircle
 };
 
 @NgModule({

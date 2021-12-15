@@ -74,7 +74,7 @@
         <img src="assets/images/sorry.gif" alt="no data yet" />
         <h4>Sorry, we have no data for {{ selectedCountry.name }} yet.</h4>
       </div>
-      <div class="com" *ngIf="filteredCommodities.length != 0">
+      <div class="com" *ngIf="filteredCommodities.length != 0 && isToBuy">
         <div class="com-details col-4">
           <small class="small">{{ selectedCountry.currency.symbol }}</small>
           <h1 class="h1">
@@ -147,7 +147,6 @@
               <label for="quantity" class="form-label">Quantity / kg</label>
               <input
                 type="number"
-
                 required
                 [(ngModel)]="buyData.quantity"
                 (ngModelChange)="onQuantityChange($event)"
@@ -167,6 +166,116 @@
               <div class="btn-group">
                 <div class="signup-btn">Proceed</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="com" *ngIf="filteredCommodities.length != 0 && isToSell">
+        <div class="col-6">
+          <div class="row">
+            <div class="mb-3 history-search">
+              <label for="name" class="form-label">Full Name </label>
+              <input
+                type="text"
+                required
+                [(ngModel)]="sellData.name"
+                class="form-control history-search-text"
+                id="name"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="phone" class="form-label">Phone </label>
+              <input
+                type="number"
+                required
+                [(ngModel)]="sellData.phone"
+                class="form-control history-search-text"
+                id="phone"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="mail" class="form-label">E-Mail </label>
+              <input
+                type="email"
+                required
+                [(ngModel)]="sellData.mail"
+                class="form-control history-search-text"
+                id="mail"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="address" class="form-label">Address </label>
+              <textarea
+                type="text"
+                required
+                [(ngModel)]="sellData.address"
+                class="form-control history-search-text"
+                id="address"
+              ></textarea>
+            </div>
+            <div class="mb-3 history-search">
+              <label for="quantity" class="form-label">Quantity / kg</label>
+              <input
+                type="number"
+                required
+                [(ngModel)]="sellData.quantity"
+                (ngModelChange)="onQuantityChange($event)"
+                class="form-control history-search-text"
+                id="quantity"
+              />
+            </div>
+            <div class="mb-3 history-search">
+              <label for="price" class="form-label">Your Price</label>
+              <input
+                type="number"
+                required
+                [(ngModel)]="sellData.price"
+                class="form-control history-search-text"
+                id="price"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="com-details col-4">
+          <label class="form-label">Upload Images</label>
+          <div class="upload">
+            <input
+              id="file"
+              type="file"
+              class="form-control"
+              [(ngModel)]="sellData.images"
+              multiple=""
+              (change)="onFileChange($event)"
+            />
+            <label for="file">
+              <img class="img"
+                src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"
+              />
+            </label>
+            <div
+              *ngIf="sellData.images.touched && sellData.images.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="sellData.images.errors.required">
+                File is required.
+              </div>
+            </div>
+            <div class="preview-wrapper">
+              <div class="img-preview" *ngFor="let url of images">
+                <img [src]="url" />
+                <i-feather
+                  (click)="removeImage(url)"
+                  name="x-circle"
+                ></i-feather>
+              </div>
+            </div>
+          </div>
+
+          <!-- <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/> -->
+          <div class="row-btm">
+            <div class="btn-group">
+              <div class="signup-btn">Proceed</div>
             </div>
           </div>
         </div>
