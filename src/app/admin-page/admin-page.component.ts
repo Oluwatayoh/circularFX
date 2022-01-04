@@ -30,7 +30,8 @@ declare var $: any;
   ],
 })
 export class AdminPageComponent implements OnInit {
-  @ViewChild('closeCModal') closeModal: any;
+  @ViewChild('closeCModal') closeCModal!: ElementRef;
+  // @ViewChild('closeCModal', { static: false }) public closeCModal: ElementRef;
   form!: FormGroup;
   saveComodityData: any = {};
   fxData: any = [];
@@ -40,6 +41,7 @@ export class AdminPageComponent implements OnInit {
   config: any;
   isEdit: boolean = false;
   selectedCountry: any = {};
+  element!: HTMLElement;
   countries: any = [
     {
       name: 'Nigeria',
@@ -347,9 +349,9 @@ export class AdminPageComponent implements OnInit {
       if (result.isConfirmed) {
         this.dataService.deleteComodity(data._id).subscribe((data) => {
           if (data.success == true) {
-            this.getCommodityData(this.selectedCountry);
+            this.getCommodityData(this.selectedCountry.name);
             Swal.fire('Deleted!', data.message, 'success');
-          }else{
+          } else {
             Swal.fire('Error!', data.message, 'error');
           }
         });
@@ -404,11 +406,7 @@ export class AdminPageComponent implements OnInit {
           }).then((result) => {
             if (result.isConfirmed) {
               this.getCommodityData(this.selectedCountry.name);
-              this.closeModal.nativeElement.click();
-              // document.getElementById("closeModalButton").click();
-              // $("#newCommodity .close").toggle()
-              // $('#newCommodity').modal().hide();
-              // $('#newCommodity').hide;
+              this.close()
             }
           });
         }
@@ -448,6 +446,9 @@ export class AdminPageComponent implements OnInit {
     this.form.get('price_month')?.value == null
       ? this.form.controls['price_month'].setValue(0)
       : this.form.get('price_month')?.value;
+    this.form.get('subCommodity')?.value == []
+      ? this.form.controls['subCommodity'].setValue(null)
+      : this.form.get('subCommodity')?.value;
     this.dataService.saveComodity(this.form.value).subscribe((data) => {
       if (data.success == true) {
         Swal.close();
@@ -461,11 +462,16 @@ export class AdminPageComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.getCommodityData(this.selectedCountry.name);
-            this.closeModal.nativeElement.click();
+            this.close()
           }
         });
       }
       console.log(data);
     });
+  }
+
+  close() {
+    this.element = document.getElementById('closeCModal') as HTMLElement;
+    this.element.click();
   }
 }
