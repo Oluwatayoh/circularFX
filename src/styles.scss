@@ -26,9 +26,9 @@ ul {
     display: block;
 }
 
-.no-data{
+.no-data {
     margin-bottom: 5rem;
-    img{
+    img {
         width: 20rem;
     }
 }
@@ -38,7 +38,7 @@ ul {
     position: fixed;
     z-index: 1000;
     background-color: #fff;
-    padding: 20px 0px;
+    padding: 0px 0px;
 }
 
 .header .navb {
@@ -49,7 +49,7 @@ ul {
 }
 
 .logo img {
-    margin-left: 100px;
+    margin-left: 50px;
     width: 20%;
 }
 
@@ -86,12 +86,16 @@ ul {
     margin-right: 100px;
 }
 
+.bb {
+    padding: 5rem 40px 20px 40px;
+}
+
 .banner {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 100px 40px 20px 40px;
+    // padding: 8rem 40px 20px 40px;
     // position: absolute;
     font-family: "Nunito", sans-serif;
     // margin-top: 10rem;
@@ -101,16 +105,20 @@ ul {
 }
 
 .app-text {
-    width: 40%;
+    width: 30%;
     float: left;
     padding-left: 50px;
 }
 
 .app-picture {
-    width: 60%;
+    width: 70%;
     float: right;
     img {
         width: -webkit-fill-available;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        border-radius: 10px;
     }
 }
 
@@ -153,14 +161,13 @@ ul {
     align-items: center;
     width: auto !important;
     position: relative;
-margin: 5rem;
+    margin: 5rem;
     .signup-btn {
-        font-size: 15px !important; 
+        font-size: 15px !important;
         border-radius: 10px !important;
         padding: 10px 40px !important;
     }
 }
-
 
 .btnn {
     float: right;
@@ -169,7 +176,7 @@ margin: 5rem;
     position: relative;
 
     .signup-btn {
-        font-size: 15px !important; 
+        font-size: 15px !important;
         border-radius: 10px !important;
         padding: 10px 40px !important;
     }
@@ -191,7 +198,7 @@ margin: 5rem;
     display: block;
     color: #fff;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     border-radius: 32px;
     background-color: #1b3664;
@@ -288,8 +295,7 @@ margin: 5rem;
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 699px) {
-
-    .social-icons{
+    .social-icons {
         display: none;
     }
     .navb {
@@ -345,11 +351,11 @@ margin: 5rem;
     }
 }
 
-
-.modal-content{
+.modal-content {
     border: none !important;
     border-radius: 0.8rem !important;
-    .modal-header, .modal-footer{
+    .modal-header,
+    .modal-footer {
         border: none !important;
     }
 }

@@ -9,7 +9,32 @@ import { DataService } from '../service/data.service';
   styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent implements OnInit {
-  constructor(private _vps: ViewportScroller, private dataService: DataService) {}
+  constructor(
+    private _vps: ViewportScroller,
+    private dataService: DataService
+  ) {}
+
+  carouselOptions = {
+    // margin: 25,
+    loop: false,
+    autoplay: true,
+    center: true,
+    dots: false,
+    navSpeed: 500,
+    // mouseDrag: true,
+    autoWidth: false,
+    autoHeight: false,
+    touchDrag: true,
+    pullDrag: false,
+    nav: false,
+    navText: ['', ''],
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+    },
+  };
 
   ngOnInit(): void {
     AOS.init();
@@ -20,7 +45,6 @@ export class ContentComponent implements OnInit {
     this._vps.scrollToAnchor(anchor);
   }
 
-
   scroll(el: HTMLElement) {
     el.scrollIntoView({
       behavior: 'smooth',
@@ -28,5 +52,4 @@ export class ContentComponent implements OnInit {
       inline: 'nearest',
     });
   }
-
 }

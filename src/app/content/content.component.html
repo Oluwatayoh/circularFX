@@ -1,22 +1,3 @@
-<div id="banner1" class="banner">
-  <div class="app-text">
-    <!-- <h3>airbnb for yatchting</h3> -->
-    <h1>Waste Collection and<br />Recycling</h1>
-    <p>
-      In line with the vision of Circular FX which is to create a marketplace
-      for the exchange of recyclable materials and commodities, Circular FX will
-      aggregate the price of recyclable materials based on the natural market
-      demand and supply by sourcing price data from franchisees and vendors
-      serving as the market price. Data of the daily rates are published on the
-      Circular FX platform showing local market price and the foreign market
-      price of each country thereby allowing subscribers to make a comparative
-      analysis on their best bet.
-    </p>
-  </div>
-  <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
-    <img src="assets/images/10.jpg" />
-  </div>
-</div>
 <div class="btn-action btn-group center">
   <div class="signup-btn" (click)="scrollFn('market_table')">
     Check Market Data
@@ -24,47 +5,178 @@
   <div class="signup-btn" routerLink="/trade">Trade on CircularFX</div>
   <div class="signup-btn">Finance Purchase order</div>
 </div>
-<!-- <div>
-  <button (click)="scrollFn('market_table')">Check Market Data</button>
-  <button (click)="scrollFn('market_table')">Trade</button>
-  <button (click)="scrollFn('market_table')">Finace Purchase Order</button>
-</div> -->
-<div>
-  <br />
-  <br />
-  <div>
-    <app-what-we-trade></app-what-we-trade>
-  </div>
 
-  <div class="social-icons">
-    <ul>
-      <li>
-        <a href="#">
-          <i-feather name="facebook"></i-feather>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i-feather name="linkedin"></i-feather>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i-feather name="instagram"></i-feather>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i-feather name="twitter"></i-feather>
-        </a>
-      </li>
-    </ul>
-  </div>
+<owl-carousel-o [options]="carouselOptions">
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Waste Collection and<br />Recycling</h1>
+        <p>
+          In line with the vision of Circular FX which is to create a
+          marketplace for the exchange of recyclable materials and commodities,
+          Circular FX will aggregate the price of recyclable materials based on
+          the natural market demand and supply by sourcing price data from
+          franchisees and vendors serving as the market price. Data of the daily
+          rates are published on the Circular FX platform showing local market
+          price and the foreign market price of each country thereby allowing
+          subscribers to make a comparative analysis on their best bet.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/10.jpg" />
+      </div>
+    </div>
+  </ng-template>
+  <ng-template carouselSlide
+    ><div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Plastic</h1>
+        <p>
+          Plastics are a wide range of synthetic or semi-synthetic materials
+          that use polymers as a main ingredient.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/plastic.jpg" />
+      </div></div
+  ></ng-template>
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Glass</h1>
+        <p>
+          Glass is an inorganic solid material that is usually transparent or
+          translucent as well as hard, brittle, and impervious to the natural
+          elements.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/glas.jpg" />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Ferrous Metals</h1>
+        <p>
+          Ferrous metals refer to any metal that contains iron. They are
+          favoured for their tensile strength and durability, so are often
+          utilised in housing construction, large-scale piping and industrial
+          containers.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/ir.jpg" />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Non-Ferrous Metals</h1>
+        <p>
+          Non-ferrous metals, on the other hand, don’t contain iron. They are
+          much more malleable and lighter than ferrous metals, making them
+          particularly suited for use where strength is required.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/allu.jpg" />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Rubber</h1>
+        <p>
+          Rubber is a strong, waterproof, elastic substance made from the juice
+          of a tropical tree or produced chemically. It is used for making
+          tyres, boots, and other products.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/rb.jpg" />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
+      <div class="app-text">
+        <h1>Cellulose Products</h1>
+        <p>
+          Cellulose is typically utilized in the manufacturing of paper and
+          paperboard.
+        </p>
+      </div>
+      <div
+        class="app-picture"
+        data-aos="zoom-out-down"
+        data-aos-duration="4000"
+      >
+        <img src="assets/images/paper.jpg" />
+      </div>
+    </div>
+  </ng-template>
+</owl-carousel-o>
+
+<div class="social-icons">
+  <ul>
+    <li>
+      <a href="#">
+        <i-feather name="facebook"></i-feather>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i-feather name="linkedin"></i-feather>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i-feather name="instagram"></i-feather>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i-feather name="twitter"></i-feather>
+      </a>
+    </li>
+  </ul>
 </div>
 
-<br />
-<br />
 <section id="market_table">
+  <br />
+  <br />
   <div class="title" style="text-align: center">
     <h2>Market Data</h2>
   </div>

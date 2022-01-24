@@ -2,6 +2,14 @@
     display: none;
 }
 
+.btn-group {
+    width: 35%;
+    .signup-btn {
+        font-size: 12px;
+        padding: 9px 30px;
+    }
+}
+
 @media only screen and (max-width: 699px) {
     .nm {
         display: none;

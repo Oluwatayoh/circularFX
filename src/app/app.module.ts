@@ -39,6 +39,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartComponent } from './content/market-table/chart/chart.component';
 import { TradeComponent } from './trade/trade.component';
 import { HttpConfigInterceptor } from './service/interceptor';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { HttpConfigInterceptor } from './service/interceptor';
     ReactiveFormsModule,
     SwiperModule,
     NgChartsModule,
+    CarouselModule,
     SweetAlert2Module.forRoot(),
   ],
   providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }, 
