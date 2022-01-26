@@ -45,6 +45,38 @@ export class FooterComponent implements OnInit {
       flag: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Ghana.svg',
     },
     {
+      name: 'Togo',
+      code: 'TG',
+      capital: 'Lomé',
+      region: 'AF',
+      currency: {
+        code: 'XOF',
+        name: 'West African CFA franc',
+        symbol: 'Fr',
+      },
+      language: {
+        code: 'fr',
+        name: 'French',
+      },
+      flag: 'https://restcountries.eu/data/tgo.svg',
+    },
+    {
+      name: 'Congo',
+      code: 'CG',
+      capital: 'Brazzaville',
+      region: 'AF',
+      currency: {
+        code: 'XAF',
+        name: 'Central African CFA franc',
+        symbol: 'Fr',
+      },
+      language: {
+        code: 'fr',
+        name: 'French',
+      },
+      flag: 'https://restcountries.eu/data/cog.svg',
+    },
+    {
       name: 'Cameroon',
       code: 'CM',
       capital: 'Yaoundé',
