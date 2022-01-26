@@ -218,6 +218,10 @@ ul {
     cursor: pointer;
 }
 
+.nav-link {
+    color: #495057;
+}
+
 .play-btn-inner {
     height: 50px;
     width: 50px;
@@ -304,6 +308,10 @@ ul {
         .menu {
             display: block;
         }
+
+        .logo {
+            margin-top: 1.5rem;
+        }
     }
     .logo img {
         margin-left: 40px;
@@ -322,8 +330,9 @@ ul {
         margin-top: 15px;
     }
     .btn-group {
-        margin-left: 40px;
-        margin-top: 15px;
+        // margin-left: 40px;
+        // margin-top: 15px;
+        margin: 0rem;
     }
     .btnn {
         float: inline-end;
@@ -348,6 +357,10 @@ ul {
             margin: 0px;
             padding-left: 0px;
         }
+    }
+
+    .bb {
+        padding: 5rem 20px 20px 20px;
     }
 }
 

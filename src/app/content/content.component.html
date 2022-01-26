@@ -181,8 +181,70 @@
     <h2>Market Data</h2>
   </div>
   <br />
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="home-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#home"
+        type="button"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+      >
+        Commodities
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#profile"
+        type="button"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+      >
+        Visualization
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active"
+      id="home"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+    >
+      <app-market-table></app-market-table>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="profile"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <app-chart></app-chart>
+    </div>
+  </div>
+  <!-- <div id="tsum-tabs">
+    <main>
+      <input id="tab1" type="radio" name="tabs" checked />
+      <label for="tab1">Commodities</label>
 
-  <app-market-table></app-market-table>
+      <input id="tab2" type="radio" name="tabs" />
+      <label for="tab2">Chart</label>
+      <section id="content1">
+       
+      </section>
+
+      <section id="content2">
+      
+      </section>
+    </main>
+  </div> -->
 </section>
 
 <br />

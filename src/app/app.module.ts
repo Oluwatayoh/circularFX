@@ -36,10 +36,12 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ContactUsComponent } from './content/contact-us/contact-us.component';
 import { OurServicesComponent } from './content/our-services/our-services.component';
 import { NgChartsModule } from 'ng2-charts';
-import { ChartComponent } from './content/market-table/chart/chart.component';
+import { ChartComponent } from './content/chart/chart.component';
 import { TradeComponent } from './trade/trade.component';
 import { HttpConfigInterceptor } from './service/interceptor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -79,6 +81,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     SwiperModule,
     NgChartsModule,
     CarouselModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'), 
+    }),
     SweetAlert2Module.forRoot(),
   ],
   providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }, 

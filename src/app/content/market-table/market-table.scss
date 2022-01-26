@@ -143,89 +143,6 @@ tbody td:last-child {
 }
 
 
-#tsum-tabs h1 {
-    padding: 50px 0;
-    font-weight: 400;
-    text-align: center;
-}
-
-#tsum-tabs p {
-    margin: 0 0 20px;
-    line-height: 1.5;
-}
-
-#tsum-tabs main {
-    padding: 50px;
-    margin: 0 auto;
-    background: #fff;
-}
-
-#tsum-tabs section {
-    display: none;
-    padding: 20px 0 0;
-    border-top: 1px solid #ddd;
-}
-
-#tsum-tabs input {
-    display: none;
-}
-
-#tsum-tabs label {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 15px 25px;
-    font-weight: 600;
-    text-align: center;
-    color: #bbb;
-    border: 1px solid transparent;
-}
-
-#tsum-tabs label:before {
-    font-family: fontawesome;
-    font-weight: normal;
-    margin-right: 10px;
-}
-
-
-#tsum-tabs label:hover {
-    color: #888;
-    cursor: pointer;
-}
-
-#tsum-tabs input:checked + label {
-    color: #555;
-    border: 1px solid #ddd;
-    border-top: 2px solid #1b3664;
-    border-bottom: 1px solid #fff;
-}
-
-
-#tsum-tabs #tab1:checked ~ #content1,
-#tsum-tabs #tab2:checked ~ #content2 {
-    display: block;
-}
-
-.chart{
-    width: 70%;
-}
-
-@media screen and (max-width: 650px) {
-    #tsum-tabs label {
-        font-size: 0;
-    }
-    #tsum-tabs label:before {
-        margin: 0;
-        font-size: 18px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    #tsum-tabs label {
-        padding: 15px;
-    }
-}
-
-
 
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {
@@ -246,5 +163,10 @@ tbody td:last-child {
 
     .search-section {
         max-width: 100% !important;
+        flex-direction: column;
+        .col-4 {
+            width: 100%;
+            margin-top: 1rem;
+        }
     }
 }

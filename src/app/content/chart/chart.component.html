@@ -1,0 +1,72 @@
+<!-- <div class="no-data" >
+    <img src="assets/images/sorry.gif" alt="no data yet" />
+    <h4>We are sorry, chart data will be available soon</h4>
+  </div> -->
+<!-- 
+<div style="display: block">
+    <canvas baseChart
+      [data]="doughnutChartData"
+      [type]="doughnutChartType">
+    </canvas>
+  </div> -->
+<!-- <div class="flex">
+  <div class="flex-item">
+    <div style="display: block">
+      <canvas
+        baseChart
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [type]="lineChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      ></canvas>
+    </div>
+  </div>
+</div> -->
+<!-- <iframe
+  style="
+    background: #21313c;
+    border: none;
+    border-radius: 2px;
+  "
+  width="100%"
+  height="600"
+  src="https://charts.mongodb.com/charts-project-0-cprne/embed/charts?id=8ee5f766-2942-4799-be70-a9d62ca3506f&maxDataAge=10&theme=dark&autoRefresh=true"
+></iframe> -->
+
+<div class="search-section" style="justify-content: space-between">
+  <div class="col-3 country">
+    <select
+      [(ngModel)]="selectedCountry"
+      class="form-select form-control form-control-bordered history-search-text"
+      (ngModelChange)="onChange($event)"
+    >
+      <option *ngFor="let c of countries" [ngValue]="c">{{ c.name }}</option>
+    </select>
+    <img src="{{ selectedCountry.flag }}" alt="" />
+  </div>
+
+  <div class="col-3 country">
+    <select  [ngModel]="selectedChart" (ngModelChange)="onChangeChart($event)"
+      class="form-select form-control form-control-bordered history-search-text"
+    >
+      <option value="0">Pie Chart</option>
+      <option value="1">Bar with Line Chart</option>
+    </select>
+  </div>
+
+  <div class="col-4 filter">
+    <div class="by">Filter by date:</div>
+    <div class="col-4">
+      <input
+        class="form-control form-control-bordered history-search-text"
+        type="date"
+        placeholder="End Date"
+      />
+    </div>
+  </div>
+</div>
+
+<br />
+
+<div echarts [options]="options" class="demo-chart"></div>

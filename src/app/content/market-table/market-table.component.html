@@ -3,10 +3,7 @@
     <div class="col-4 country">
       <select
         [(ngModel)]="selectedCountry"
-        class="
-          form-select form-control form-control-bordered
-          history-search-text
-        "
+        class="form-select form-control form-control-bordered history-search-text"
         (ngModelChange)="onChange($event)"
       >
         <option *ngFor="let c of countries" [ngValue]="c">{{ c.name }}</option>
@@ -28,118 +25,93 @@
     <h4>Sorry, we have no data for {{ selectedCountry.name }} yet.</h4>
   </div>
   <div *ngIf="fxData.length > 0" class="table-responsive">
-    <div id="tsum-tabs">
-      <main>
-        <input id="tab1" type="radio" name="tabs" checked />
-        <label for="tab1">Commodities</label>
-
-        <input id="tab2" type="radio" name="tabs" />
-        <label for="tab2">Chart</label>
-        <section id="content1">
-          <table class="table" *ngIf="fxData.length != 0">
-            <thead>
-              <tr>
-                <th class="fr" scope="col">COMODITY</th>
-                <th class="amount" scope="col">
-                  PRICE ({{ selectedCountry.currency.code }} / KG)
-                </th>
-                <th class="amount" scope="col">CHANGE (%)</th>
-                <!-- <th class="amount" scope="col">LAST WEEK (NGN / KG)</th> -->
-                <th class="amount" scope="col">PREVIOUS PRICE (NGN / KG)</th>
-                <!-- <th scope="col"></th> -->
-              </tr>
-            </thead>
-            <tbody
-              id="myUL"
-              *ngFor="let fx of fxData | searchPipe: filter; let i = index"
+    <table class="table" *ngIf="fxData.length != 0">
+      <thead>
+        <tr>
+          <th class="fr" scope="col">COMODITY</th>
+          <th class="amount" scope="col">
+            PRICE ({{ selectedCountry.currency.code }} / KG)
+          </th>
+          <th class="amount" scope="col">CHANGE (%)</th>
+          <!-- <th class="amount" scope="col">LAST WEEK (NGN / KG)</th> -->
+          <th class="amount" scope="col">PREVIOUS PRICE (NGN / KG)</th>
+          <!-- <th scope="col"></th> -->
+        </tr>
+      </thead>
+      <tbody
+        id="myUL"
+        *ngFor="let fx of fxData | searchPipe: filter; let i = index"
+      >
+        <tr class="tr">
+          <td class="fr">
+            <div class="name_sub" (click)="showClass(fx)">
+              {{ fx.name.toUpperCase() }}
+              <div
+                *ngIf="fx.subCommodity && fx.subCommodity != 0"
+                class="chevron"
+              >
+                <i-feather *ngIf="showSub" name="chevron-up"></i-feather>
+                <i-feather *ngIf="!showSub" name="chevron-down"></i-feather>
+              </div>
+            </div>
+          </td>
+          <td class="amount">
+            {{ selectedCountry.currency.symbol }}{{ fx.price }}
+          </td>
+          <td
+            [ngClass]="
+              fx.percentage == null || fx.percentage == ''
+                ? 'black'
+                : fx.percentage.toString().includes('-')
+                ? 'red'
+                : 'green'
+            "
+            class="amount"
+          >
+            {{
+              fx.percentage == null || fx.percentage == "" ? "-" : fx.percentage
+            }}
+          </td>
+          <!-- <td class="amount">
+                        {{ fx.price_week }}
+                    </td> -->
+          <td class="amount">
+            {{ selectedCountry.currency.symbol }}{{ fx.price_month }}
+          </td>
+        </tr>
+        <!-- <tbody class="tr" *ngIf="fx.class.length > 0"> -->
+        <thead class="tr" style="width: 100%" *ngIf="!showSub" [@panelInOut]>
+          <tr class="tr" *ngFor="let cl of fx.subCommodity">
+            <th class="fr">{{ cl.name.toUpperCase() }}</th>
+            <td class="amount">
+              {{ selectedCountry.currency.symbol }}{{ cl.price }}
+            </td>
+            <td
+              [ngClass]="
+                cl.percentage == null || cl.percentage == ''
+                  ? 'black'
+                  : cl.percentage.toString().includes('-')
+                  ? 'red'
+                  : 'green'
+              "
+              class="amount"
             >
-              <tr class="tr">
-                <td class="fr">
-                  <div class="name_sub" (click)="showClass(fx)">
-                    {{ fx.name.toUpperCase() }}
-                    <div
-                      *ngIf="fx.subCommodity && fx.subCommodity != 0"
-                      class="chevron"
-                    >
-                      <i-feather *ngIf="showSub" name="chevron-up"></i-feather>
-                      <i-feather
-                        *ngIf="!showSub"
-                        name="chevron-down"
-                      ></i-feather>
-                    </div>
-                  </div>
-                </td>
-                <td class="amount">
-                  {{ selectedCountry.currency.symbol }}{{ fx.price }}
-                </td>
-                <td
-                  [ngClass]="
-                    fx.percentage == null || fx.percentage == ''
-                      ? 'black'
-                      : fx.percentage.toString().includes('-')
-                      ? 'red'
-                      : 'green'
-                  "
-                  class="amount"
-                >
-                  {{
-                    fx.percentage == null || fx.percentage == ""
-                      ? "-"
-                      : fx.percentage
-                  }}
-                </td>
-                <!-- <td class="amount">
+              {{
+                cl.percentage == null || cl.percentage == ""
+                  ? "-"
+                  : cl.percentage
+              }}
+            </td>
+            <!-- <td class="amount">
                               {{ fx.price_week }}
                           </td> -->
-                <td class="amount">
-                  {{ selectedCountry.currency.symbol }}{{ fx.price_month }}
-                </td>
-              </tr>
-              <!-- <tbody class="tr" *ngIf="fx.class.length > 0"> -->
-              <thead
-                class="tr"
-                style="width: 100%;"
-                *ngIf="!showSub"
-                [@panelInOut]
-              >
-                <tr class="tr" *ngFor="let cl of fx.subCommodity">
-                  <th class="fr">{{ cl.name.toUpperCase() }}</th>
-                  <td class="amount">
-                    {{ selectedCountry.currency.symbol }}{{ cl.price }}
-                  </td>
-                  <td
-                    [ngClass]="
-                      cl.percentage == null || cl.percentage == ''
-                        ? 'black'
-                        : cl.percentage.toString().includes('-')
-                        ? 'red'
-                        : 'green'
-                    "
-                    class="amount"
-                  >
-                    {{
-                      cl.percentage == null || cl.percentage == ""
-                        ? "-"
-                        : cl.percentage
-                    }}
-                  </td>
-                  <!-- <td class="amount">
-                                    {{ fx.price_week }}
-                                </td> -->
-                  <td class="amount">
-                    {{ selectedCountry.currency.symbol }}{{ cl.price_month }}
-                  </td>
-                </tr>
-              </thead>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="content2">
-          <app-chart [chartData]="fxData"></app-chart>
-        </section>
-      </main>
-    </div>
+            <td class="amount">
+              {{ selectedCountry.currency.symbol }}{{ cl.price_month }}
+            </td>
+          </tr>
+        </thead>
+      </tbody>
+    </table>
 
     <!-- <pagination-controls *ngIf="fxData.length > 5" style="float: right; margin-top: 10px;"
             (pageChange)="pageChanged($event)">

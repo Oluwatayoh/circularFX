@@ -1,7 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
-import { ChartComponent } from './chart/chart.component';
 
 @Component({
   selector: 'app-market-table',
@@ -9,20 +8,17 @@ import { ChartComponent } from './chart/chart.component';
   styleUrls: ['./market-table.scss'],
   animations: [
     trigger('panelInOut', [
-        transition('void => *', [
-            style({transform: 'translateY(-100%)'}),
-            animate(800)
-        ]),
-        transition('* => void', [
-            animate(800, style({transform: 'translateY(-100%)'}))
-        ])
-    ])
-]
+      transition('void => *', [
+        style({ transform: 'translateY(-100%)' }),
+        animate(800),
+      ]),
+      transition('* => void', [
+        animate(800, style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
+  ],
 })
-
 export class MarketTableComponent implements OnInit {
-  @ViewChild(ChartComponent, {static: true}) child! : ChartComponent;
-  
   showSub: boolean = false;
   fxData: any = [];
   countries: any = [
@@ -57,6 +53,22 @@ export class MarketTableComponent implements OnInit {
         name: 'English',
       },
       flag: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Ghana.svg',
+    },
+    {
+      name: 'Togo',
+      code: 'TG',
+      capital: 'Lomé',
+      region: 'AF',
+      currency: {
+        code: 'XOF',
+        name: 'West African CFA franc',
+        symbol: 'Fr',
+      },
+      language: {
+        code: 'fr',
+        name: 'French',
+      },
+      flag: 'https://restcountries.eu/data/tgo.svg',
     },
     {
       name: 'Cameroon',
@@ -202,7 +214,6 @@ export class MarketTableComponent implements OnInit {
       this.fxData = countryData.sort(
         (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
       );
-      console.log(this.child)
     });
   }
 
@@ -221,13 +232,9 @@ export class MarketTableComponent implements OnInit {
     // });
     this.selectedCountry = this.countries[0];
     this.getCommodityData(this.selectedCountry.name);
-   console.log(this.child)
   }
 
-
-ngAfterViewInit() {
-    console.log('on after view init', this.child);
+  ngAfterViewInit() {
     // this returns null
-}
-  
+  }
 }

@@ -20,6 +20,10 @@ export class DataService {
     return this.http.post<any>(`${this.baseUrl}commodity`, data);
   }
 
+  saveHistory(data : any) {
+    return this.http.post<any>(`${this.baseUrl}pricehistories`, data);
+  }
+
   eidtComodity(data : any, id:number) {
     return this.http.put<any>(`${this.baseUrl}commodity/${id}`, data);
   }

@@ -1,0 +1,64 @@
+.no-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.country {
+    display: flex;
+    background-color: #cbdec845;
+    justify-content: space-between;
+    border-radius: 10px;
+    align-items: center;
+    img {
+        width: 30px;
+        margin: 7px;
+        border-radius: 5px;
+    }
+}
+
+.demo-chart {
+    height: 40rem;
+}
+
+.search-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0rem;
+}
+
+.filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .by {
+        margin-right: 1rem;
+    }
+}
+
+.history-search-text {
+    border: none !important;
+    background-color: #cbdec845;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+    .search-section {
+        max-width: 100% !important;
+        flex-direction: column;
+        .col-4,
+        .col-3 {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+    .demo-chart {
+        height: 10rem;
+    }
+}

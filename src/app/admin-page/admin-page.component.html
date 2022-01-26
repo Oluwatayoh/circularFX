@@ -22,10 +22,7 @@
             <select
               [(ngModel)]="selectedCountry"
               (ngModelChange)="onChange($event)"
-              class="
-                form-select form-control form-control-bordered
-                history-search-text
-              "
+              class="form-select form-control form-control-bordered history-search-text"
             >
               <option *ngFor="let m of countries" [ngValue]="m">
                 {{ m.name }}
@@ -87,7 +84,12 @@
                   </div>
                 </td>
                 <td class="amount">
-                  {{ selectedCountry.currency.symbol }}{{ fx.price == null || fx.price == 0 ? "-" : fx.price | wz_naira_money_format}}
+                  {{ selectedCountry.currency.symbol
+                  }}{{
+                    fx.price == null || fx.price == 0
+                      ? "-"
+                      : (fx.price | wz_naira_money_format)
+                  }}
                 </td>
                 <td
                   [ngClass]="
@@ -110,7 +112,8 @@
                                 </td> -->
 
                 <td class="amount">
-                  {{ selectedCountry.currency.symbol }}{{ fx.price_month | wz_naira_money_format}}
+                  {{ selectedCountry.currency.symbol
+                  }}{{ fx.price_month | wz_naira_money_format }}
                   {{
                     fx.price_month > 0
                       ? "as
@@ -135,11 +138,7 @@
                   </div>
                 </td>
               </tr>
-              <thead
-                class="tr"
-                *ngIf="!showSub"
-                [@panelInOut]
-              >
+              <thead class="tr" *ngIf="!showSub" [@panelInOut]>
                 <tr class="tr" *ngFor="let cl of fx.subCommodity">
                   <th class="fr">{{ cl.name.toUpperCase() }}</th>
                   <td class="amount">
@@ -336,10 +335,17 @@
                 </div>
               </div>
             </div>
-            <div class="add" (click)="addNewContacts()">
-              <i-feather name="plus"> </i-feather>
-              Add
+            <div class="row">
+              <div class="add" (click)="addNewContacts()">
+                <i-feather name="plus"> </i-feather>
+                Add Sub Category
+              </div>
+              <label *ngIf="isEdit">
+                <input type="checkbox" (change)="onCheckboxChange($event)" />
+                Save Price history
+              </label>
             </div>
+
             <!-- <div class="primary" >
                 <i-feather name="plus"></i-feather>
               </div> -->
