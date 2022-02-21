@@ -42,6 +42,8 @@ import { HttpConfigInterceptor } from './service/interceptor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import * as echarts from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { PickUpComponent } from './content/pick-up/pick-up.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 
 @NgModule({
@@ -68,6 +70,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     OurServicesComponent,
     ChartComponent,
     TradeComponent,
+    PickUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SwiperModule,
     NgChartsModule,
     CarouselModule,
+    // GooglePlaceModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), 
     }),

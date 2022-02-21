@@ -1,0 +1,82 @@
+<app-header></app-header>
+
+<div class="service-wrap">
+  <img class="demo-bg" src="assets/images/10.jpg" alt="" />
+  <section class="">
+    <div class="s-heading">
+      <h1>Request <font color="#148d44">Pick-Up</font></h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <form class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" />
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" />
+            </div>
+            <div class="col-12">
+              <label for="address" class="form-label">Full Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="1234 Main St"
+                ngx-google-places-autocomplete
+                (onAddressChange)="handleAddressChange($event)"
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="commodities" class="form-label"
+                >Select Commodity</label
+              >
+              <select id="commodities" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="measurement" class="form-label"
+                >Measurement (kg)</label
+              >
+              <input type="number" class="form-control" id="measurement" />
+            </div>
+
+            <div>
+              <label for="upload" class="form-label"
+                >Please upload images of your commodity</label
+              >
+              <input
+                class="form-control"
+                type="file"
+                id="upload"
+                multiple
+                (change)="onSelect($event)"
+                #inputFile
+                accept="image/jpg, image/jpeg"
+              />
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-5">
+          <div class="no-data" *ngIf="urls.length == 0">
+            <img src="assets/images/sorry.gif" alt="no data yet" />
+            <h4>Please upload some images</h4>
+          </div>
+          <div *ngIf="urls.length != 0" class="img-wrap">
+            <img *ngFor="let url of urls" [src]="url" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

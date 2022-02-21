@@ -424,54 +424,27 @@ export class AdminPageComponent implements OnInit {
     this.form.get('price_month')?.value == null
       ? this.form.controls['price_month'].setValue(0)
       : this.form.get('price_month')?.value;
-
-    if (this.saveComodityData) {
-      this.dataService.saveHistory(this.form.value);
-      this.dataService
-        .eidtComodity(this.form.value, this.saveComodityData._id)
-        .subscribe((data) => {
-          if (data.success == true) {
-            Swal.close();
-            Swal.fire({
-              title: 'Successful!',
-              text: 'Comodity Updated successfully',
-              icon: 'success',
-              showConfirmButton: true,
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.getCommodityData(this.selectedCountry.name);
-                this.close();
-              }
-            });
-          }
-          console.log(data);
-        });
-    }
-    if (!this.savePriceHistory) {
-      this.dataService
-        .eidtComodity(this.form.value, this.saveComodityData._id)
-        .subscribe((data) => {
-          if (data.success == true) {
-            Swal.close();
-            Swal.fire({
-              title: 'Successful!',
-              text: 'Comodity Updated successfully',
-              icon: 'success',
-              showConfirmButton: true,
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.getCommodityData(this.selectedCountry.name);
-                this.close();
-              }
-            });
-          }
-          console.log(data);
-        });
-    }
+    this.dataService
+      .eidtComodity(this.form.value, this.saveComodityData._id)
+      .subscribe((data) => {
+        if (data.success == true) {
+          Swal.close();
+          Swal.fire({
+            title: 'Successful!',
+            text: 'Comodity Updated successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getCommodityData(this.selectedCountry.name);
+              this.close();
+            }
+          });
+        }
+        console.log(data);
+      });
   }
 
   onSave() {
@@ -509,50 +482,25 @@ export class AdminPageComponent implements OnInit {
     this.form.get('subCommodity')?.value == []
       ? this.form.controls['subCommodity'].setValue(null)
       : this.form.get('subCommodity')?.value;
-
-    if (this.saveComodityData) {
-      this.dataService.saveHistory(this.form.value);
-      this.dataService.saveComodity(this.form.value).subscribe((data) => {
-        if (data.success == true) {
-          Swal.close();
-          Swal.fire({
-            title: 'Successful!',
-            text: 'Comodity saved successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getCommodityData(this.selectedCountry.name);
-              this.close();
-            }
-          });
-        }
-        console.log(data);
-      });
-    }
-    if (!this.savePriceHistory) {
-      this.dataService.saveComodity(this.form.value).subscribe((data) => {
-        if (data.success == true) {
-          Swal.close();
-          Swal.fire({
-            title: 'Successful!',
-            text: 'Comodity saved successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getCommodityData(this.selectedCountry.name);
-              this.close();
-            }
-          });
-        }
-        console.log(data);
-      });
-    }
+    this.dataService.saveComodity(this.form.value).subscribe((data) => {
+      if (data.success == true) {
+        Swal.close();
+        Swal.fire({
+          title: 'Successful!',
+          text: 'Comodity saved successfully',
+          icon: 'success',
+          showConfirmButton: true,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.getCommodityData(this.selectedCountry.name);
+            this.close();
+          }
+        });
+      }
+      console.log(data);
+    });
   }
 
   close() {
