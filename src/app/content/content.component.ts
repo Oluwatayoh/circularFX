@@ -14,6 +14,9 @@ export class ContentComponent implements OnInit {
     private dataService: DataService
   ) {}
 
+  defaultOverview: boolean = true;
+  compare: boolean = false;
+
   carouselOptions = {
     // margin: 25,
     loop: false,
@@ -51,5 +54,16 @@ export class ContentComponent implements OnInit {
       block: 'start',
       inline: 'nearest',
     });
+  }
+
+  changeState(e: any) {
+    console.log(e.target.value);
+    if (e === 'overView') {
+      this.defaultOverview = true;
+      this.compare = false;
+    } else if (e === 'compare') {
+      this.defaultOverview = false;
+      this.compare = true;
+    }
   }
 }

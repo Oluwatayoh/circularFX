@@ -44,6 +44,7 @@ import * as echarts from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { PickUpComponent } from './content/pick-up/pick-up.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { ChartCompareComponent } from './content/chart-compare/chart-compare.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     ChartComponent,
     TradeComponent,
     PickUpComponent,
+    ChartCompareComponent,
   ],
   imports: [
     BrowserModule,

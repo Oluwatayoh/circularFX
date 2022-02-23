@@ -22,17 +22,13 @@
           subscribers to make a comparative analysis on their best bet.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/10.jpg" />
       </div>
     </div>
   </ng-template>
-  <ng-template carouselSlide
-    ><div id="banner1" class="banner">
+  <ng-template carouselSlide>
+    <div id="banner1" class="banner">
       <div class="app-text">
         <h1>Plastic</h1>
         <p>
@@ -40,14 +36,11 @@
           that use polymers as a main ingredient.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/plastic.jpg" />
-      </div></div
-  ></ng-template>
+      </div>
+    </div>
+  </ng-template>
   <ng-template carouselSlide>
     <div id="banner1" class="banner">
       <div class="app-text">
@@ -58,11 +51,7 @@
           elements.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/glas.jpg" />
       </div>
     </div>
@@ -79,11 +68,7 @@
           containers.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/ir.jpg" />
       </div>
     </div>
@@ -99,11 +84,7 @@
           particularly suited for use where strength is required.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/allu.jpg" />
       </div>
     </div>
@@ -119,11 +100,7 @@
           tyres, boots, and other products.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/rb.jpg" />
       </div>
     </div>
@@ -138,11 +115,7 @@
           paperboard.
         </p>
       </div>
-      <div
-        class="app-picture"
-        data-aos="zoom-out-down"
-        data-aos-duration="4000"
-      >
+      <div class="app-picture" data-aos="zoom-out-down" data-aos-duration="4000">
         <img src="assets/images/paper.jpg" />
       </div>
     </div>
@@ -183,50 +156,37 @@
   <br />
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button
-        class="nav-link active"
-        id="home-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#home"
-        type="button"
-        role="tab"
-        aria-controls="home"
-        aria-selected="true"
-      >
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+        aria-controls="home" aria-selected="true">
         Commodities
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button
-        class="nav-link"
-        id="profile-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#profile"
-        type="button"
-        role="tab"
-        aria-controls="profile"
-        aria-selected="false"
-      >
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+        aria-controls="profile" aria-selected="false">
         Visualization
       </button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div
-      class="tab-pane fade show active"
-      id="home"
-      role="tabpanel"
-      aria-labelledby="home-tab"
-    >
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <app-market-table></app-market-table>
     </div>
-    <div
-      class="tab-pane fade"
-      id="profile"
-      role="tabpanel"
-      aria-labelledby="profile-tab"
-    >
-      <app-chart></app-chart>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <br>
+      <br>
+      <input type="radio" class="btn-check" (change)="changeState($event)" #checkBox value="overView"
+        name="options-outlined" id="success-outlined" autocomplete="off" checked>
+      <label class="btn btn-outline-primary btn-left" for="success-outlined">Commodity Overview</label>
+
+      <input type="radio" class="btn-check" (change)="changeState($event)" #checkBox2 value="compare"
+        name="options-outlined" id="danger-outlined" autocomplete="off">
+      <label class="btn btn-outline-primary btn-right" for="danger-outlined">Compare Commodity Prices</label>
+
+      <br>
+      <br>
+      <app-chart *ngIf="checkBox.checked"></app-chart>
+      <app-chart-compare *ngIf="checkBox2.checked"></app-chart-compare>
     </div>
   </div>
   <!-- <div id="tsum-tabs">
