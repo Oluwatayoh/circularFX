@@ -4,7 +4,8 @@
   <img class="demo-bg" src="assets/images/10.jpg" alt="" />
   <section class="">
     <div class="s-heading">
-      <h1>Request <font color="#148d44">Pick-Up</font></h1>
+      <h1>Request <font color="#148d44">Pick-Up</font>
+      </h1>
     </div>
 
     <div class="container">
@@ -13,57 +14,51 @@
           <form class="row g-3">
             <div class="col-md-6">
               <label for="name" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="name" />
+              <input type="text" [(ngModel)]="pickupData.fullname" class="form-control" name="name" id="name" />
             </div>
             <div class="col-md-6">
               <label for="phone" class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" />
+              <input type="tel" [(ngModel)]="pickupData.phone" class="form-control" name="phone" id="phone" />
             </div>
-            <div class="col-12">
+            <div class="col-md-6">
               <label for="address" class="form-label">Full Address</label>
-              <input
-                type="text"
-                class="form-control"
-                id="address"
-                placeholder="1234 Main St"
-                ngx-google-places-autocomplete
-                (onAddressChange)="handleAddressChange($event)"
-              />
+              <div id="locationField">
+                <input type="text" class="form-control" id="autocomplete" placeholder="Search Location"
+                  ngx-google-places-autocomplete (onAddressChange)="getAddress($event)" />
+              </div>
+
+              <!--
+              <input type="text" id="address" placeholder="1234 Main St" ngx-google-places-autocomplete
+                (onAddressChange)="handleAddressChange($event)" /> -->
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Email Address</label>
+              <input type="email" [(ngModel)]="pickupData.email" name="email" class="form-control" id="phone" />
             </div>
 
             <div class="col-md-6">
-              <label for="commodities" class="form-label"
-                >Select Commodity</label
-              >
-              <select id="commodities" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <label for="commodities" class="form-label">Select Commodity</label>
+              <select id="commodities" class="form-select" [(ngModel)]="selectedCommodity" name="commodity"
+                (ngModelChange)="onChangeCommodity($event)">
+                <option *ngFor="let m of commodityList" [ngValue]="m">
+                  {{ m.name }}
+                </option>
               </select>
             </div>
             <div class="col-md-6">
-              <label for="measurement" class="form-label"
-                >Measurement (kg)</label
-              >
-              <input type="number" class="form-control" id="measurement" />
+              <label for="measurement" class="form-label">Measurement </label>
+              <input type="text" [(ngModel)]="pickupData.measurement" name="measuremnet" class="form-control"
+                id="measurement" />
             </div>
 
             <div>
-              <label for="upload" class="form-label"
-                >Please upload images of your commodity</label
-              >
-              <input
-                class="form-control"
-                type="file"
-                id="upload"
-                multiple
-                (change)="onSelect($event)"
-                #inputFile
-                accept="image/jpg, image/jpeg"
-              />
+              <label for="upload" class="form-label">Please upload images of your commodity</label>
+              <input class="form-control" type="file" id="upload" multiple (change)="onSelect($event)" #inputFile
+                accept="image/jpg, image/jpeg" />
             </div>
 
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" (click)="onSave()" class="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>

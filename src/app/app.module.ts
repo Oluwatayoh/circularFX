@@ -12,7 +12,6 @@ import { DataService } from './service/data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
 
-
 import {
   DetermineDayPipe,
   ElipsesPipe,
@@ -45,7 +44,10 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { PickUpComponent } from './content/pick-up/pick-up.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { ChartCompareComponent } from './content/chart-compare/chart-compare.component';
-
+import { NewCommodityComponent } from './admin-page/new-commodity/new-commodity.component';
+import { CommodityPriceUpdateComponent } from './admin-page/commodity-price-update/commodity-price-update.component';
+import { LoaderComponent } from './loader/loader.component';
+import { UtilityService } from './service/utils.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,9 @@ import { ChartCompareComponent } from './content/chart-compare/chart-compare.com
     TradeComponent,
     PickUpComponent,
     ChartCompareComponent,
+    NewCommodityComponent,
+    CommodityPriceUpdateComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,15 +90,25 @@ import { ChartCompareComponent } from './content/chart-compare/chart-compare.com
     ReactiveFormsModule,
     SwiperModule,
     NgChartsModule,
+    GooglePlaceModule,
     CarouselModule,
     // GooglePlaceModule,
     NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'), 
+      echarts: () => import('echarts'),
     }),
     SweetAlert2Module.forRoot(),
   ],
-  providers: [DataService, CommodityResolver, { provide: LocationStrategy, useClass: PathLocationStrategy }, 
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }],
+  providers: [
+    DataService,
+    UtilityService,
+    CommodityResolver,
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

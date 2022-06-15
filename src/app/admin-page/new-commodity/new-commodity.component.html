@@ -1,0 +1,84 @@
+<div class="col">
+  <div class="btn-group col-4" style="width: auto !important;">
+    <div class="signup-btn" (click)="newC()" data-bs-toggle="modal" data-bs-target="#newCommodity">
+      <i-feather name="plus" style="margin-right: 5px"></i-feather> New Commodity
+    </div>
+  </div>
+  <div class="space"></div>
+  <div class="space"></div>
+  <div class="space"></div>
+  <div class="col-8 col-lg-4">
+    <input id="searchInput" [(ngModel)]="filter2" class="form-control form-control-bordered history-search-text"
+      type="text" placeholder="search..." />
+  </div>
+  <div class="space"></div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            S/N
+          </th>
+          <th scope="col">Name</th>
+        </tr>
+      </thead>
+      <tbody id="myUL" *ngFor="
+          let cm of commodityList | searchPipe: filter2 | paginate: config2;
+          let i = index
+        ">
+        <tr (click)="onSelect(cm)" data-bs-toggle="modal" data-bs-target="#newCommodity" class="tr">
+          <td>{{i +1}}
+          </td>
+          <td>{{ cm.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls *ngIf="commodityList.length > 5" style="float: right; margin-top: 10px"
+      (pageChange)="cmPageChanged($event)">
+    </pagination-controls>
+  </div>
+</div>
+
+<div class="modal fade" id="newCommodity" tabindex="-1" aria-labelledby="newCommodityLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!isEdit" class="modal-title" id="newCommodityLabel">New Commodity</h5>
+        <h5 *ngIf="isEdit" class="modal-title" id="newCommodityLabel">Edit Commodity</h5>
+        <button type="button" id="closeCModal" #closeCModal class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="needs-validation">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name </label>
+            <input type="text" required [(ngModel)]="saveCommodity.name" class="form-control" id="name" />
+          </div>
+          <div class="mb-3">
+            <div class="form-check md-3">
+              <input class="form-check-input" type="checkbox" value="hasParent" name="hasParent"
+                [(ngModel)]="saveCommodity.isParent" id="flexCheckChecked">
+              <label class="form-check-label" for="flexCheckChecked">
+                Has Parent Category
+              </label>
+            </div>
+          </div>
+          <select *ngIf="saveCommodity.isParent" [(ngModel)]="selectedCommodity" (ngModelChange)="onChange($event)"
+            name="selectedCommodity" class="
+            form-select md-3" aria-label="Default select example">
+            <option *ngFor="let cm of commodityList" [ngValue]="cm">{{cm.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div *ngIf="!isEdit" class="btn-group" style=" justify-content: right" (click)="onSaveCommodity()">
+          <div class="signup-btn">Save</div>
+        </div>
+        <div *ngIf="isEdit" class="btn-group" style=" justify-content: right" (click)="onUpdateCommodity()">
+          <div class="signup-btn">Update</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- (ngModelChange)="onChange($event)" -->
+</div>

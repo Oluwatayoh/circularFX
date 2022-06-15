@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
   baseUrl: string = `${environment.baseUrl}`;
@@ -190,32 +190,55 @@ export class DataService {
     },
   ];
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getData() {
     return this.http.get<any>(`${this.baseUrl}commodity`);
   }
-  saveComodity(data : any) {
-    return this.http.post<any>(`${this.baseUrl}commodity`, data);
+
+  saveComodity(data: any) {
+    return this.http.post<any>(`${this.baseUrl}commodity/create`, data);
   }
 
-  saveHistory(data : any) {
+  eidtComodity(data: any, id: number) {
+    return this.http.put<any>(`${this.baseUrl}commodity/update/${id}`, data);
+  }
+
+  getPrices() {
+    return this.http.get<any>(`${this.baseUrl}price`);
+  }
+
+  savePrice(data: any) {
+    return this.http.post<any>(`${this.baseUrl}price/create`, data);
+  }
+
+  eidtPrice(data: any, id: number) {
+    return this.http.put<any>(`${this.baseUrl}price/update/${id}`, data);
+  }
+  filterPriceWithDate(data: any) {
+    return this.http.post<any>(`${this.baseUrl}price/search`, data);
+  }
+
+  saveHistory(data: any) {
     return this.http.post<any>(`${this.baseUrl}pricehistories`, data);
   }
 
-  eidtComodity(data : any, id:number) {
-    return this.http.put<any>(`${this.baseUrl}commodity/${id}`, data);
-  }
-
-  deleteComodity(id : any) {
+  deleteComodity(id: any) {
     return this.http.delete<any>(`${this.baseUrl}commodity/${id}`);
   }
 
-  getCountries(){
+  getCountries() {
     return this.countries;
   }
 
-}
 
+
+  //PickUps
+
+  getPickUps() {
+    return this.http.get<any>(`${this.baseUrl}pickup`);
+  }
+  savePickUp(data: any) {
+    return this.http.post<any>(`${this.baseUrl}pickup/create`, data);
+  }
+}

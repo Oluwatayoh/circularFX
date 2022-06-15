@@ -1,374 +1,379 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
 }
 
 html,
 body {
-    scroll-behavior: smooth;
-    height: 100%;
-    width: 100%;
+  scroll-behavior: smooth;
+  height: 100%;
+  width: 100%;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 .layout {
-    display: block;
+  display: block;
 }
 
 .no-data {
-    margin-bottom: 5rem;
-    img {
-        width: 20rem;
-    }
+  margin-bottom: 5rem;
+  img {
+    width: 20rem;
+  }
 }
 
 .header {
-    width: 100%;
-    position: fixed;
-    z-index: 1000;
-    background-color: #fff;
-    padding: 0px 0px;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  background-color: #fff;
+  padding: 0px 0px;
 }
 
 .header .navb {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo img {
-    margin-left: 50px;
-    width: 20%;
+  margin-left: 50px;
+  width: 20%;
 }
 
 .menu ul li {
-    display: inline-block;
-    padding: 0 25px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 80px;
-    align-items: center;
-    width: 100%;
+  display: inline-block;
+  padding: 0 25px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 80px;
+  align-items: center;
+  width: 100%;
 }
 
 .menu ul li:hover {
-    // background-color: #238d44;
-    text-decoration: underline;
+  // background-color: #238d44;
+  text-decoration: underline;
 }
 
 .menu ul {
-    display: flex;
-    margin-bottom: 0px;
+  display: flex;
+  margin-bottom: 0px;
 }
 
 .login-btn {
-    display: block;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    border-radius: 30px;
-    color: #fff;
-    background-color: #238d44;
-    padding: 8px 40px;
-    margin-right: 100px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #238d44;
+  padding: 8px 40px;
+  margin-right: 100px;
 }
 
 .bb {
-    padding: 5rem 40px 20px 40px;
+  padding: 5rem 40px 20px 40px;
 }
 
 .banner {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    // padding: 8rem 40px 20px 40px;
-    // position: absolute;
-    font-family: "Nunito", sans-serif;
-    // margin-top: 10rem;
-    // bottom: 2%;
-    color: #1b3664;
-    // color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  // padding: 8rem 40px 20px 40px;
+  // position: absolute;
+  font-family: "Nunito", sans-serif;
+  // margin-top: 10rem;
+  // bottom: 2%;
+  color: #1b3664;
+  // color: #fff;
 }
 
 .app-text {
-    width: 30%;
-    float: left;
-    padding-left: 50px;
+  width: 30%;
+  float: left;
+  padding-left: 50px;
 }
 
 .app-picture {
-    width: 70%;
-    float: right;
-    img {
-        width: -webkit-fill-available;
-        background-position: center; /* Center the image */
-        background-repeat: no-repeat; /* Do not repeat the image */
-        background-size: cover; /* Resize the background image to cover the entire container */
-        border-radius: 10px;
-    }
+  width: 70%;
+  float: right;
+  img {
+    width: -webkit-fill-available;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    border-radius: 10px;
+  }
 }
 
 .app-text h3 {
-    margin-top: 100px;
-    font-size: 17px;
-    color: #1b3664;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  margin-top: 100px;
+  font-size: 17px;
+  color: #1b3664;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .app-text h1 {
-    font-size: 51px;
+  font-size: 51px;
+  position: relative;
+  color: #1b3664;
+  margin-top: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.app-text p {
+  font-size: 19px;
+  margin: 30px 30px 30px 0;
+  letter-spacing: 1px;
+  color: #1b3664;
+  // padding-right: 250px;
+}
+
+.btn-group {
+  display: flex;
+  width: 25%;
+  position: relative;
+}
+
+.btn-action {
+  // float: right;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: auto !important;
+  position: relative;
+  margin: 5rem;
+  .signup-btn {
+    font-size: 15px !important;
+    border-radius: 10px !important;
+    padding: 10px 40px !important;
+  }
+}
+
+.btnn {
+  float: right;
+  display: flex;
+  width: auto !important;
+  position: relative;
+
+  .signup-btn {
+    font-size: 15px !important;
+    border-radius: 10px !important;
+    padding: 10px 40px !important;
+  }
+}
+.title {
+  color: #1b3664;
+  h2 {
+    font-size: 35px;
     position: relative;
     color: #1b3664;
     margin-top: 30px;
     font-weight: 700;
     line-height: 1;
-}
-
-.app-text p {
-    font-size: 19px;
-    margin: 30px 30px 30px 0;
-    letter-spacing: 1px;
-    color: #1b3664;
-    // padding-right: 250px;
-}
-
-.btn-group {
-    display: flex;
-    width: 25%;
-    position: relative;
-}
-
-.btn-action {
-    // float: right;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: auto !important;
-    position: relative;
-    margin: 5rem;
-    .signup-btn {
-        font-size: 15px !important;
-        border-radius: 10px !important;
-        padding: 10px 40px !important;
-    }
-}
-
-.btnn {
-    float: right;
-    display: flex;
-    width: auto !important;
-    position: relative;
-
-    .signup-btn {
-        font-size: 15px !important;
-        border-radius: 10px !important;
-        padding: 10px 40px !important;
-    }
-}
-.title {
-    color: #1b3664;
-    h2 {
-        font-size: 35px;
-        position: relative;
-        color: #1b3664;
-        margin-top: 30px;
-        font-weight: 700;
-        line-height: 1;
-    }
+  }
 }
 
 .btn-group .signup-btn {
-    cursor: pointer;
-    display: block;
-    color: #fff;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    border-radius: 32px;
-    background-color: #1b3664;
-    padding: 7px 40px;
+  cursor: pointer;
+  display: block;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 32px;
+  background-color: #1b3664;
+  padding: 7px 40px;
 }
 
 .btn-group .play-btn {
-    margin-left: 40px;
-    display: inline-flex;
+  margin-left: 40px;
+  display: inline-flex;
 }
 
 .btn-group span {
-    color: #1b3664;
-    font-size: 15px;
-    font-weight: 700;
-    margin: auto 20px;
-    cursor: pointer;
+  color: #1b3664;
+  font-size: 15px;
+  font-weight: 700;
+  margin: auto 20px;
+  cursor: pointer;
 }
 
 .nav-link {
-    color: #495057;
+  color: #495057;
 }
 
 .play-btn-inner {
-    height: 50px;
-    width: 50px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    background-color: #1b3664;
+  height: 50px;
+  width: 50px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background-color: #1b3664;
 }
 
 .play-btn-inner i {
-    padding: 15px 19px;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 15px 19px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .about-services {
-    // position: absolute;
-    // top: 125%;
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
-    padding: 0 100px;
+  // position: absolute;
+  // top: 125%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  padding: 0 100px;
 }
 
 .about-services ul {
-    display: inline-flex;
-    margin: 20px auto;
-    text-align: center;
+  display: inline-flex;
+  margin: 20px auto;
+  text-align: center;
 }
 
 .about-services ul li {
-    margin: 0 30px;
-    cursor: pointer;
+  margin: 0 30px;
+  cursor: pointer;
 }
 
 .about-services ul li img {
-    width: 120px;
-    height: auto;
+  width: 120px;
+  height: auto;
 }
 
 .about-services ul li h1 {
-    font-size: 20px;
-    margin-top: 20px;
+  font-size: 20px;
+  margin-top: 20px;
 }
 
 .about-services ul li p {
-    font-size: 15px;
-    margin-top: 20px;
-    font-weight: 700;
+  font-size: 15px;
+  margin-top: 20px;
+  font-weight: 700;
 }
 
 .social-icons {
-    position: fixed;
-    right: 30px;
-    top: 30%;
+  position: fixed;
+  right: 30px;
+  top: 30%;
 }
 
 .social-icons ul li {
-    margin-top: 5px;
-    text-align: center;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .social-icons ul li a {
-    color: #1b3664;
-    padding: 10px;
-    display: block;
-    font-size: 29px;
+  color: #1b3664;
+  padding: 10px;
+  display: block;
+  font-size: 29px;
 }
 
 .social-icons ul li a:hover {
-    background-color: #238d44;
-    border-radius: 15%;
-    color: #fff;
+  background-color: #238d44;
+  border-radius: 15%;
+  color: #fff;
+}
+
+.space {
+  height: 1rem;
 }
 
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 699px) {
-    .social-icons {
-        display: none;
-    }
-    .navb {
-        flex-direction: column;
-        align-items: start !important;
-        .menu {
-            display: block;
-        }
-
-        .logo {
-            margin-top: 1.5rem;
-        }
-    }
-    .logo img {
-        margin-left: 40px;
-        width: 12rem;
-    }
-    .login-btn {
-        display: block;
-        font-size: 15px;
-        font-weight: 700;
-        cursor: pointer;
-        border-radius: 30px;
-        color: #fff;
-        background-color: #238d44;
-        padding: 10px 40px;
-        margin-left: 40px;
-        margin-top: 15px;
-    }
-    .btn-group {
-        // margin-left: 40px;
-        // margin-top: 15px;
-        margin: 0rem;
-    }
-    .btnn {
-        float: inline-end;
-    }
-    .banner {
-        padding: 50px 40px 20px 0px;
-    }
-    .app-text {
-        width: 100%;
-        h3 {
-            margin-top: 80px;
-        }
-    }
-    .app-picture {
-        display: none;
-    }
-    .about-services {
-        padding: 0px;
-        margin-top: 5rem;
-        ul {
-            flex-direction: column;
-            margin: 0px;
-            padding-left: 0px;
-        }
+  .social-icons {
+    display: none;
+  }
+  .navb {
+    flex-direction: column;
+    align-items: start !important;
+    .menu {
+      display: block;
     }
 
-    .bb {
-        padding: 5rem 20px 20px 20px;
+    .logo {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
+  }
+  .logo img {
+    margin-left: 40px;
+    width: 12rem;
+  }
+  .login-btn {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #238d44;
+    padding: 10px 40px;
+    margin-left: 40px;
+    margin-top: 15px;
+  }
+  .btn-group {
+    // margin-left: 40px;
+    // margin-top: 15px;
+    margin: 0rem;
+  }
+  .btnn {
+    float: inline-end;
+  }
+  .banner {
+    padding: 50px 40px 20px 0px;
+  }
+  .app-text {
+    width: 100%;
+    h3 {
+      margin-top: 80px;
+    }
+  }
+  .app-picture {
+    display: none;
+  }
+  .about-services {
+    padding: 0px;
+    margin-top: 5rem;
+    ul {
+      flex-direction: column;
+      margin: 0px;
+      padding-left: 0px;
+    }
+  }
+
+  .bb {
+    padding: 5rem 20px 20px 20px;
+  }
 }
 
 .modal-content {
+  border: none !important;
+  border-radius: 0.8rem !important;
+  .modal-header,
+  .modal-footer {
     border: none !important;
-    border-radius: 0.8rem !important;
-    .modal-header,
-    .modal-footer {
-        border: none !important;
-    }
+  }
 }

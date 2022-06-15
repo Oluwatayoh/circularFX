@@ -1,0 +1,136 @@
+<div class="col">
+  <h6 class="d-lg-none d-flex">Update Price</h6>
+  <div class="">
+    <div class="btn-group col-4" style="width: auto !important;">
+      <div class="signup-btn" (click)="newP()" data-bs-toggle="modal" data-bs-target="#newPrice">
+        <i-feather name="plus" style="margin-right: 5px"></i-feather> New Price
+      </div>
+    </div>
+    <div class="space"></div>
+    <div class="space"></div>
+
+    <div class="country history-search-text">
+      <select [(ngModel)]="selectedCountry" (ngModelChange)="onChange($event)"
+        class="form-select form-control form-control-bordered"
+        style="background-color: transparent; border: none !important;">
+        <option *ngFor="let m of dataService.getCountries()" [ngValue]="m">
+          {{ m.name }}
+        </option>
+      </select>
+      <img src="{{ selectedCountry.flag }}" alt="" />
+    </div>
+    <div class="space"></div>
+    <div class="mb-3 custom-row">
+      <div class="form-check col-12 col-lg-4 ">
+        <input class="form-check-input" type="checkbox" value="filter" name="filter" [(ngModel)]="isFilter"
+          id="filter">
+        <label class="form-check-label" for="filter">
+          Filter date range
+        </label>
+      </div>
+      <div class="row col-12 col-lg-6" *ngIf="isFilter">
+        <div class="col-6 col-lg-6">
+          <input [(ngModel)]="startDate" class="form-control form-control-bordered history-search-text" type="text"
+            placeholder="Start Date" onfocus="(this.type='date')" />
+        </div>
+        <div class="col-6 col-lg-6">
+          <input [(ngModel)]="endDate" class="form-control form-control-bordered history-search-text" type="text"
+            placeholder="End Date" onfocus="(this.type='date')" />
+        </div>
+      </div>
+
+    <div class="space d-flex d-lg-none"></div>
+      <div *ngIf="isFilter" class="btn-group col-lg-4" style="width: auto !important;">
+        <div class="signup-btn" (click)="filterPrice()">Filter
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-data" *ngIf="priceData.length == 0">
+    <img src="assets/images/sorry.gif" alt="no data yet" />
+    <h4>Sorry, we have no data for {{ selectedCountry.name }} yet.</h4>
+  </div>
+  <!-- <div *ngIf="fxData.length > 0" class="table-responsive"> -->
+  <div *ngIf="priceData.length != 0" class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="fr" scope="col">COMODITY</th>
+          <th class="amount" scope="col">
+            PRICE TODAY ({{ selectedCountry.currency.symbol }})
+          </th>
+          <th class="amount" scope="col">
+            Date
+          </th>
+        </tr>
+      </thead>
+      <tbody id="myUL" *ngFor="
+                    let fx of priceData | searchPipe: filter | paginate: config;
+                    let i = index
+                  ">
+        <tr class="tr" data-bs-toggle="modal" data-bs-target="#newPrice" (click)="showEdit(fx)">
+          <td class="fr">
+            <div class="name_sub">
+              {{ fx.name }}
+            </div>
+          </td>
+          <td class="amount">{{ selectedCountry.currency.symbol }}{{ fx.amount == null || fx.amount == 0 ? "-" :
+            (fx.amount | wz_naira_money_format) }}</td>
+          <td class="amount"> {{ fx.createdAt | date: 'd MMMM, y'}}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls *ngIf="priceData.length > 5" style="float: right; margin-top: 10px"
+    (pageChange)="pageChanged($event)">
+  </pagination-controls>
+</div>
+
+<div class="modal fade" id="newPrice" tabindex="-1" aria-labelledby="newPriceLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!isEdit" class="modal-title" id="newCommodityLabel">New Price</h5>
+        <h5 *ngIf="isEdit" class="modal-title" id="newCommodityLabel">Update Price</h5>
+        <button type="button" id="closeCModal" #closeCModal class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="needs-validation">
+          <div class="mb-3">
+            <label for="name" class="form-label">Selected Country </label>
+            <h4>{{selectedCountry.name}}</h4>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Selected Commodity </label>
+            <select [(ngModel)]="selectedCommodity" (ngModelChange)="onChangeCommodity($event)"
+              class="form-select form-control form-control-bordered"
+              style="background-color: transparent; border: none !important;">
+              <option *ngFor="let m of commodityList" [ngValue]="m">
+                {{ m.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price ({{ selectedCountry.currency.code }})</label>
+            <input type="number" [(ngModel)]="savePriceData.amount" required class="form-control" id="price" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeCModal" hidden data-bs-dismiss="modal">
+          Close
+        </button>
+        <div *ngIf="!isEdit" class="btn-group" (click)="onSave()" style="justify-content: right">
+          <div class="signup-btn">Save</div>
+        </div>
+        <div *ngIf="isEdit" class="btn-group" (click)="onUpdate()" style=" justify-content: right">
+          <div class="signup-btn">Update</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

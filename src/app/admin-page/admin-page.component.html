@@ -1,386 +1,93 @@
 <section class="layout">
   <div class="container">
-    <div class="row">
-      <div class="action-b">
-        <h3>Commodities</h3>
-        <div class="btn-group">
-          <div
-            class="signup-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#newCommodity"
-            (click)="showNew()"
-          >
-            <i-feather name="plus" style="margin-right: 5px"></i-feather> New
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true">
+          Commodity Update
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false">
+          Pick-Up Requests
+        </button>
+      </li>
+    </ul>
+    <br>
+    <br>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+          <h3>Commodities</h3>
+          <div class="space"></div>
+          <div class="space"></div>
+          <div class="col-12">
+            <div class="row">
+              <app-new-commodity class="col-12 col-lg-6"></app-new-commodity>
+              <hr class="d-lg-none d-flex">
+              <div class="d-lg-none d-flex space"></div>
+              <app-commodity-price-update class="col-12 col-lg-6"></app-commodity-price-update>
+            </div>
           </div>
         </div>
       </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <br>
+        <h3>Pick-Up List</h3>
+        <div class="space"></div>
+        <div class="space"></div>
+        <div class="col-8 col-lg-4">
+          <input id="searchInput" [(ngModel)]="filter" class="form-control form-control-bordered history-search-text"
+            type="text" placeholder="search..." />
+        </div>
+        <div class="space"></div>
 
-      <div class="container" style="padding: 0px !important">
-        <div class="search-section" style="justify-content: space-between">
-          <div class="col-4 country history-search-text">
-            <!-- <label for="month" class="form-label">Select Country</label> -->
-            <select
-              [(ngModel)]="selectedCountry"
-              (ngModelChange)="onChange($event)"
-              class="form-select form-control form-control-bordered history-search-text"
-            >
-              <option *ngFor="let m of countries" [ngValue]="m">
-                {{ m.name }}
-              </option>
-            </select>
-            <img src="{{ selectedCountry.flag }}" alt="" />
-          </div>
-          <div class="col-4">
-            <input
-              id="searchInput"
-              [(ngModel)]="filter"
-              class="form-control form-control-bordered history-search-text"
-              type="text"
-              placeholder="search..."
-            />
-          </div>
-        </div>
-        <div class="no-data" *ngIf="fxData.length == 0">
+        <div class="no-data" *ngIf="pickUps.length == 0">
           <img src="assets/images/sorry.gif" alt="no data yet" />
-          <h4>Sorry, we have no data for {{ selectedCountry.name }} yet.</h4>
+          <h4>Sorry, we have no PickUp Request yet.</h4>
         </div>
-        <div *ngIf="fxData.length > 0" class="table-responsive">
+        <div class="table-responsive" *ngIf="pickUps.length != 0">
           <table class="table">
             <thead>
               <tr>
-                <th class="fr" scope="col">COMODITY</th>
-                <th class="amount" scope="col">
-                  PRICE TODAY ({{ selectedCountry.currency.symbol }} / KG)
+                <th scope="col">
+                  S/N
                 </th>
-                <th class="amount" scope="col">CHANGE (%)</th>
-                <!-- <th class="amount" scope="col">LAST WEEK (NGN)</th> -->
-                <th class="amount" scope="col">
-                  PREVIOUS PRICE ({{ selectedCountry.currency.symbol }} / KG)
-                </th>
-                <th scope="col"></th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Location</th>
+                <th scope="col">Commodity</th>
+                <th scope="col">Measurement</th>
               </tr>
             </thead>
-            <tbody
-              id="myUL"
-              *ngFor="
-                let fx of fxData | searchPipe: filter | paginate: config;
+            <tbody id="myUL" *ngFor="
+                let cm of pickUps | searchPipe: filter | paginate: config;
                 let i = index
-              "
-            >
-              <tr class="tr">
-                <td class="fr">
-                  <div class="name_sub" (click)="showClass(fx)">
-                    {{ fx.name.toUpperCase() }}
-                    <div
-                      *ngIf="fx.subCommodity && fx.subCommodity != 0"
-                      class="chevron"
-                    >
-                      <i-feather *ngIf="showSub" name="chevron-up"></i-feather>
-                      <i-feather
-                        *ngIf="!showSub"
-                        name="chevron-down"
-                      ></i-feather>
-                    </div>
-                  </div>
+              ">
+              <tr data-bs-toggle="modal" data-bs-target="#newCommodity" class="tr">
+                <td>{{i +1}}
                 </td>
-                <td class="amount">
-                  {{ selectedCountry.currency.symbol
-                  }}{{
-                    fx.price == null || fx.price == 0
-                      ? "-"
-                      : (fx.price | wz_naira_money_format)
-                  }}
-                </td>
-                <td
-                  [ngClass]="
-                    fx.percentage == null || fx.percentage == ''
-                      ? 'black'
-                      : fx.percentage.toString().includes('-')
-                      ? 'red'
-                      : 'green'
-                  "
-                  class="amount"
-                >
-                  {{
-                    fx.percentage == null || fx.percentage == 0
-                      ? "-"
-                      : fx.percentage
-                  }}
-                </td>
-                <!-- <td class="amount">
-                                    {{ fx.price_week | wz_naira_money_format}}
-                                </td> -->
-
-                <td class="amount">
-                  {{ selectedCountry.currency.symbol
-                  }}{{ fx.price_month | wz_naira_money_format }}
-                  {{
-                    fx.price_month > 0
-                      ? "as
-                                    at"
-                      : ""
-                  }}
-                  {{ fx.price_month > 0 ? fx.month : "" }}
-                </td>
-                <td>
-                  <div class="action">
-                    <i-feather
-                      name="edit"
-                      data-bs-toggle="modal"
-                      data-bs-target="#newCommodity"
-                      (click)="showEdit(fx)"
-                    ></i-feather>
-                    <i-feather
-                      (click)="onDelete(fx)"
-                      name="trash-2"
-                    ></i-feather>
-                    <!-- <i-feather name="eye"></i-feather> -->
-                  </div>
-                </td>
+                <td>{{ cm.fullname}}</td>
+                <td>{{ cm.phone}}</td>
+                <td>{{ cm.email}}</td>
+                <td>{{ cm.address}}</td>
+                <td>{{ cm.commodity.name}}</td>
+                <td>{{ cm.measurement}}</td>
               </tr>
-              <thead class="tr" *ngIf="!showSub" [@panelInOut]>
-                <tr class="tr" *ngFor="let cl of fx.subCommodity">
-                  <th class="fr">{{ cl.name.toUpperCase() }}</th>
-                  <td class="amount">
-                    {{ selectedCountry.currency.symbol }}{{ cl.price }}
-                  </td>
-                  <td
-                    [ngClass]="
-                      cl.percentage == null || cl.percentage == ''
-                        ? 'black'
-                        : cl.percentage.toString().includes('-')
-                        ? 'red'
-                        : 'green'
-                    "
-                    class="amount"
-                  >
-                    {{
-                      cl.percentage == null || cl.percentage == ""
-                        ? "-"
-                        : cl.percentage
-                    }}
-                  </td>
-                  <!-- <td class="amount">
-                                  {{ fx.price_week }}
-                              </td> -->
-                  <td class="amount">
-                    {{ selectedCountry.currency.symbol }}{{ cl.price_month }}
-                  </td>
-                </tr>
-              </thead>
             </tbody>
           </table>
-          <pagination-controls
-            *ngIf="fxData.length > 5"
-            style="float: right; margin-top: 10px"
-            (pageChange)="pageChanged($event)"
-          >
+          <pagination-controls *ngIf="pickUps.length > 5" style="float: right; margin-top: 10px"
+            (pageChange)="pageChanged($event)">
           </pagination-controls>
         </div>
       </div>
-
-      <!-- *ngIf="fxData.length > 10" -->
     </div>
-    <div class="col-4"></div>
-    <div class="col-6"></div>
+
+
+
+
+
   </div>
 </section>
-
-<div
-  class="modal fade"
-  id="newCommodity"
-  tabindex="-1"
-  aria-labelledby="newCommodityLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newCommodityLabel">New Commodity</h5>
-        <button
-          type="button"
-          (click)="creatForm()"
-          id="closeCModal"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="needs-validation" novalidate [formGroup]="form">
-          <!-- <div class="mb-3">
-                         <label for="month" class="form-label">Select Country</label>
-                        <select [(ngModel)]="saveComodityData.country" class="form-select">
-                            <option *ngFor="let m of countries" [ngValue]="m.name">{{m.name}}</option>
-                        </select>
-                    </div> -->
-          <div class="mb-3">
-            <label for="name" class="form-label">Name </label>
-            <input
-              type="text"
-              required
-              formControlName="name"
-              class="form-control"
-              id="name"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="price" class="form-label"
-              >Price / Kg ({{ selectedCountry.currency.code }})</label
-            >
-            <input
-              type="number"
-              required
-              formControlName="price"
-              class="form-control"
-              id="price"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="price_month" class="form-label"
-              >Last Month Price / Kg ({{
-                selectedCountry.currency.code
-              }})(Optional)</label
-            >
-            <input
-              type="number"
-              formControlName="price_month"
-              class="form-control"
-              (ngModelChange)="valuechange($event)"
-              id="price_month"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="percent" class="form-label">Percentage Change</label>
-            <input
-              type="number"
-              formControlName="percentage"
-              maxlength="3"
-              min="0"
-              max="100"
-              class="form-control"
-              id="percent"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="month" class="form-label"
-              >Select Month as at last Price</label
-            >
-            <select formControlName="month" class="form-select">
-              <option *ngFor="let m of monthData" [value]="m">{{ m }}</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="class" class="form-label">Sub Category</label>
-            <div
-              class="form-array"
-              formArrayName="subCommodity"
-              *ngFor="let o of sub.controls; index as idx; last as isLast"
-            >
-              <div class="sub_cat" [formGroupName]="idx">
-                <i-feather
-                  style="float: right; color: red"
-                  (click)="removeContact(idx)"
-                  name="trash-2"
-                ></i-feather>
-                <div class="mb-3">
-                  <label for="name" class="form-label">Name </label>
-                  <input
-                    type="text"
-                    formControlName="name"
-                    class="form-control"
-                    id="name"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="price" class="form-label"
-                    >Price / Kg ({{ selectedCountry.currency.code }})</label
-                  >
-                  <input
-                    type="number"
-                    formControlName="price"
-                    class="form-control"
-                    id="price"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="price_month" class="form-label"
-                    >Last Price / Kg ({{
-                      selectedCountry.currency.code
-                    }})(Optional)</label
-                  >
-                  <input
-                    type="number"
-                    formControlName="price_month"
-                    class="form-control"
-                    (ngModelChange)="valuechange2($event, idx)"
-                    id="price_month"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="percent" class="form-label"
-                    >Percentage Change</label
-                  >
-                  <input
-                    type="number"
-                    formControlName="percentage"
-                    maxlength="3"
-                    min="0"
-                    max="100"
-                    class="form-control"
-                    id="percent"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="add" (click)="addNewContacts()">
-                <i-feather name="plus"> </i-feather>
-                Add Sub Category
-              </div>
-              <label *ngIf="isEdit">
-                <input type="checkbox" (change)="onCheckboxChange($event)" />
-                Save Price history
-              </label>
-            </div>
-
-            <!-- <div class="primary" >
-                <i-feather name="plus"></i-feather>
-              </div> -->
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          id="closeCModal"
-          hidden
-          data-bs-dismiss="modal"
-        >
-          Close
-        </button>
-        <div
-          *ngIf="isEdit == false"
-          class="btn-group"
-          (click)="onSave()"
-          style="width: 100%; justify-content: right"
-        >
-          <div class="signup-btn">Save</div>
-        </div>
-        <div
-          *ngIf="isEdit"
-          class="btn-group"
-          (click)="onUpdate()"
-          style="width: 100%; justify-content: right"
-        >
-          <div class="signup-btn">Update</div>
-        </div>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      </div>
-    </div>
-  </div>
-  <!-- (ngModelChange)="onChange($event)" -->
-</div>

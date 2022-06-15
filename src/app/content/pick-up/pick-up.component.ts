@@ -6,6 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { DataService } from 'src/app/service/data.service';
+import { UtilityService } from 'src/app/service/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,29 +16,65 @@ import Swal from 'sweetalert2';
   styleUrls: ['./pick-up.component.scss'],
 })
 export class PickUpComponent implements OnInit {
-  constructor(public zone: NgZone) {}
-  userAddress: string = '';
-  userLatitude: string = '';
-  userLongitude: string = '';
+  constructor(
+    public dataService: DataService,
+    private utilService: UtilityService
+  ) {}
   urls: any = [];
   files: any;
-
+  pickupData: any = {};
   pickupDetails!: String;
 
-  ngOnInit(): void {}
+  selectedCommodity: any = {};
+  commodityList: any = [];
 
-  @ViewChild('placesRef') placesRef!: GooglePlaceDirective;
+  ngOnInit(): void {
+    this.getCommodities();
+  }
+
   @ViewChild('inputFile') myFiles!: ElementRef;
 
-  handleAddressChange(address: any) {
-    this.userAddress = address.formatted_address;
-    this.userLatitude = address.geometry.location.lat();
-    this.userLongitude = address.geometry.location.lng();
+  getAddress(place: any) {
+    const addressFrom = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      city: 'sublocality_level_1',
+      state: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name',
+    };
+    place.address_components.forEach((add: any) => {
+      add.types.forEach((addType: any) => {
+        if (addType == 'street_number')
+          addressFrom.street_number = add.short_name;
+        if (addType == 'route') addressFrom.route = add.long_name;
+        if (addType == 'locality' || addType == 'sublocality_level_1')
+          addressFrom.city = add.long_name;
+        if (addType == 'administrative_area_level_1')
+          addressFrom.state = add.long_name;
+        if (addType == 'country') addressFrom.country = add.long_name;
+        if (addType == 'postal_code') addressFrom.postal_code = add.long_name;
+      });
+    });
+
+    this.pickupData.address = `${addressFrom.street_number} ${addressFrom.route}, ${addressFrom.city}, ${addressFrom.state}, ${addressFrom.country} ${addressFrom.postal_code}`;
+    console.log(this.pickupData.address);
+  }
+
+  getCommodities() {
+    this.dataService.getData().subscribe((data) => {
+      this.commodityList = data.data;
+      this.selectedCommodity = this.commodityList[0];
+    });
+  }
+
+  onChangeCommodity(cm: any) {
+    this.selectedCommodity = cm;
   }
 
   onSelect(e: any) {
     if (e.target.files) {
-
       console.log(e.target.files);
       if (e.target.files.length > 4) {
         this.urls = [];
@@ -61,5 +99,26 @@ export class PickUpComponent implements OnInit {
         }
       }
     }
+  }
+
+  onSave() {
+    this.pickupData.commodityId = this.selectedCommodity.id;
+    this.pickupData.imageUrl = [
+      'https://static.remove.bg/remove-bg-web/eb1bb48845c5007c3ec8d72ce7972fc8b76733b1/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg',
+    ];
+    this.utilService.showLoading();
+    this.dataService.savePickUp(this.pickupData).subscribe((data) => {
+      if (data.success) {
+        this.pickupData = {};
+        this.utilService.hideLoading();
+        this.utilService.showSuccess('', data.message);
+        console.log(data);
+      } else {
+        this.pickupData = {};
+        this.utilService.hideLoading();
+        this.utilService.showError('', data.message);
+        console.log(data);
+      }
+    });
   }
 }

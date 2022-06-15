@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://circularfx-api.vercel.app/api/',
+  // baseUrl: 'https://circularfx-api.vercel.app/api/',
+  baseUrl: 'https://circular-fx-api-2-fbudg.ondigitalocean.app/api/',
+  SPACES_KEY: '6G4B2RHNWHXBRXWBDZLS',
+  SPACES_SECRET: 'bXE4nFOfFS/Ay+9cogFcgqdIvzesBcMLGdHkLDUy5pE',
   // baseUrl:'http://localhost:3000/api/'
 };
 
