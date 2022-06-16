@@ -1,24 +1,41 @@
 <div class="container">
   <div class="search-section" style="justify-content: space-between">
     <div class="col-4 country">
-      <select
-        [(ngModel)]="selectedCountry"
-        class="form-select form-control form-control-bordered history-search-text"
-        (ngModelChange)="onChange($event)"
-      >
-        <option *ngFor="let c of countries" [ngValue]="c">{{ c.name }}</option>
+      <select [(ngModel)]="selectedCountry" class="form-select form-control form-control-bordered history-search-text"
+        (ngModelChange)="onChange($event)">
+        <option *ngFor="let c of dataService.getCountries()" [ngValue]="c">{{ c.name }}</option>
       </select>
       <img src="{{ selectedCountry.flag }}" alt="" />
     </div>
-    <div class="col-4">
-      <input
-        id="searchInput"
-        [(ngModel)]="filter"
-        class="form-control form-control-bordered history-search-text"
-        type="text"
-        placeholder="search..."
-      />
+
+    <!-- <div class="form-check col-12 col-lg-2 ">
+      <input class="form-check-input" type="checkbox" value="filter" name="filter" [(ngModel)]="isFilter" id="filter">
+      <label class="form-check-label" for="filter">
+        Filter date range
+      </label>
+    </div> -->
+
+    <div class="space d-flex d-lg-none"></div>
+    <div class="row col-12 col-lg-6">
+      <div class="col-6 col-lg-6">
+        <input [(ngModel)]="startDate" class="form-control form-control-bordered history-search-text" type="text"
+          placeholder="Start Date" onfocus="(this.type='date')" />
+      </div>
+      <div class="col-6 col-lg-6">
+        <input [(ngModel)]="endDate" class="form-control form-control-bordered history-search-text" type="text"
+          placeholder="End Date" onfocus="(this.type='date')" />
+      </div>
     </div>
+
+    <div class="space d-flex d-lg-none"></div>
+    <div class="btn-group col-lg-4" style="width: auto !important;">
+      <div class="signup-btn" (click)="filterPrice()">Filter
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <input id="searchInput" [(ngModel)]="filter" class="form-control form-control-bordered history-search-text"
+      type="text" placeholder="search..." />
   </div>
   <div class="no-data" *ngIf="fxData.length == 0">
     <img src="assets/images/sorry.gif" alt="no data yet" />
@@ -30,95 +47,31 @@
         <tr>
           <th class="fr" scope="col">COMODITY</th>
           <th class="amount" scope="col">
-            PRICE ({{ selectedCountry.currency.code }} / KG)
+            PRICE TODAY ({{ selectedCountry.currency.code }})
           </th>
-          <th class="amount" scope="col">CHANGE (%)</th>
+          <!-- <th class="amount" scope="col">CHANGE (%)</th> -->
           <!-- <th class="amount" scope="col">LAST WEEK (NGN / KG)</th> -->
-          <th class="amount" scope="col">PREVIOUS PRICE (NGN / KG)</th>
+          <th class="amount" scope="col">AS AT</th>
           <!-- <th scope="col"></th> -->
         </tr>
       </thead>
-      <tbody
-        id="myUL"
-        *ngFor="let fx of fxData | searchPipe: filter; let i = index"
-      >
+      <tbody id="myUL" *ngFor="let fx of fxData | searchPipe: filter | paginate: config; let i = index">
         <tr class="tr">
           <td class="fr">
             <div class="name_sub" (click)="showClass(fx)">
-              {{ fx.name.toUpperCase() }}
-              <div
-                *ngIf="fx.subCommodity && fx.subCommodity != 0"
-                class="chevron"
-              >
-                <i-feather *ngIf="showSub" name="chevron-up"></i-feather>
-                <i-feather *ngIf="!showSub" name="chevron-down"></i-feather>
-              </div>
+              {{ fx.name }}
             </div>
           </td>
-          <td class="amount">
-            {{ selectedCountry.currency.symbol }}{{ fx.price }}
-          </td>
-          <td
-            [ngClass]="
-              fx.percentage == null || fx.percentage == ''
-                ? 'black'
-                : fx.percentage.toString().includes('-')
-                ? 'red'
-                : 'green'
-            "
-            class="amount"
-          >
-            {{
-              fx.percentage == null || fx.percentage == "" ? "-" : fx.percentage
-            }}
-          </td>
-          <!-- <td class="amount">
-                        {{ fx.price_week }}
-                    </td> -->
-          <td class="amount">
-            {{ selectedCountry.currency.symbol }}{{ fx.price_month }}
+          <td class="amount">{{ selectedCountry.currency.symbol }}{{ fx.amount == null || fx.amount == 0 ? "-" :
+            (fx.amount | wz_naira_money_format) }}</td>
+          <td class="amount"> {{ fx.createdAt | date: 'd MMMM, y'}}
           </td>
         </tr>
-        <!-- <tbody class="tr" *ngIf="fx.class.length > 0"> -->
-        <thead class="tr" style="width: 100%" *ngIf="!showSub" [@panelInOut]>
-          <tr class="tr" *ngFor="let cl of fx.subCommodity">
-            <th class="fr">{{ cl.name.toUpperCase() }}</th>
-            <td class="amount">
-              {{ selectedCountry.currency.symbol }}{{ cl.price }}
-            </td>
-            <td
-              [ngClass]="
-                cl.percentage == null || cl.percentage == ''
-                  ? 'black'
-                  : cl.percentage.toString().includes('-')
-                  ? 'red'
-                  : 'green'
-              "
-              class="amount"
-            >
-              {{
-                cl.percentage == null || cl.percentage == ""
-                  ? "-"
-                  : cl.percentage
-              }}
-            </td>
-            <!-- <td class="amount">
-                              {{ fx.price_week }}
-                          </td> -->
-            <td class="amount">
-              {{ selectedCountry.currency.symbol }}{{ cl.price_month }}
-            </td>
-          </tr>
-        </thead>
       </tbody>
     </table>
 
-    <!-- <pagination-controls *ngIf="fxData.length > 5" style="float: right; margin-top: 10px;"
-            (pageChange)="pageChanged($event)">
-        </pagination-controls> -->
+    <pagination-controls *ngIf="fxData.length > 10" style="float: right; margin-top: 10px;"
+      (pageChange)="pageChanged($event)">
+    </pagination-controls>
   </div>
-
-  <!-- <div *ngIf="fxData.length == 0" class="no-data">No Data yet</div> -->
 </div>
-
-<!-- *ngIf="fxData.length > 10" -->

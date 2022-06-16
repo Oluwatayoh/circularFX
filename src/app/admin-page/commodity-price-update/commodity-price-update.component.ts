@@ -49,8 +49,6 @@ export class CommodityPriceUpdateComponent implements OnInit {
     // this.getRun();
   }
 
-
-
   getCommodities() {
     this.dataService.getData().subscribe((data) => {
       this.commodityList = data.data;
@@ -67,13 +65,7 @@ export class CommodityPriceUpdateComponent implements OnInit {
       let countryData = data.data.filter(
         (p: any) => p.countryId === this.selectedCountry.code
       );
-      // this.priceData = countryData.filter(
-      //   (pr: any) => pr.commodityId === this.selectedCommodity.id
-      // );
-      this.priceData = countryData.sort(
-        (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
-      );
-      console.log(this.priceData);
+      this.priceData = countryData.reverse();
     });
   }
 
@@ -86,19 +78,14 @@ export class CommodityPriceUpdateComponent implements OnInit {
       let countryData = data.data.filter(
         (p: any) => p.countryId === this.selectedCountry.code
       );
-      // this.priceData = countryData.filter(
-      //   (pr: any) => pr.commodityId === this.selectedCommodity.id
-      // );
-      this.priceData = countryData.sort(
-        (a: any, b: any) => parseFloat(b.id) - parseFloat(a.id)
-      );
-      console.log(this.priceData);
+      this.priceData = countryData.reverse();
     });
   }
 
   onChange(country: string) {
     this.selectedCountry = country;
     this.getPriceData();
+    this.isFilter = false;
   }
 
   onChangeCommodity(cm: any) {

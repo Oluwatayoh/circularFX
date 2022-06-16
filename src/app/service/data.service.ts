@@ -208,6 +208,13 @@ export class DataService {
     return this.http.get<any>(`${this.baseUrl}price`);
   }
 
+  getPricesByCountry(countryId: string) {
+    let da = {
+      countryId: countryId,
+    };
+    return this.http.post<any>(`${this.baseUrl}price/countryId`, da);
+  }
+
   savePrice(data: any) {
     return this.http.post<any>(`${this.baseUrl}price/create`, data);
   }
@@ -231,8 +238,6 @@ export class DataService {
     return this.countries;
   }
 
-
-
   //PickUps
 
   getPickUps() {
@@ -240,5 +245,26 @@ export class DataService {
   }
   savePickUp(data: any) {
     return this.http.post<any>(`${this.baseUrl}pickup/create`, data);
+  }
+
+  //Send SMS
+  sendSMS(to: string, message: string) {
+    let str = to.substring(1);
+    let fTo = '234' + str;
+    var data = {
+      to: fTo,
+      from: 'N-Alert',
+      sms: message,
+      type: 'plain',
+      api_key: environment.TERMII_API_KEY,
+      channel: 'dnd',
+    };
+
+    const smsD = JSON.stringify(data);
+
+    return this.http.post<any>(
+      `${environment.TERMII_BASE_URL}api/sms/send`,
+      smsD
+    );
   }
 }

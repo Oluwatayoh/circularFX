@@ -109,9 +109,25 @@ export class PickUpComponent implements OnInit {
     this.utilService.showLoading();
     this.dataService.savePickUp(this.pickupData).subscribe((data) => {
       if (data.success) {
-        this.pickupData = {};
+        this.dataService
+          .sendSMS(
+            this.pickupData.phone,
+            'Thank for requesting for our pickup service, We will review your request and get back to you.'
+          )
+          .subscribe((data) => {
+            console.log(data);
+          });
         this.utilService.hideLoading();
+        this.dataService
+          .sendSMS(
+            '09021562109',
+            `${this.pickupData.fullname} has requested for ${this.selectedCommodity.name} pickup from ${this.pickupData.address}, please treat`
+          )
+          .subscribe((data) => {
+            console.log(data);
+          });
         this.utilService.showSuccess('', data.message);
+        this.pickupData = {};
         console.log(data);
       } else {
         this.pickupData = {};
