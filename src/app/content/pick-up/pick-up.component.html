@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 
 <div class="service-wrap">
   <img class="demo-bg" src="assets/images/10.jpg" alt="" />
@@ -10,7 +10,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-7">
+        <div class="col-12 col-lg-7">
           <form class="row g-3">
             <div class="col-md-6">
               <label for="name" class="form-label">Full Name</label>
@@ -60,9 +60,15 @@
             <div class="col-12">
               <button type="submit" (click)="onSave()" class="btn btn-primary">Submit</button>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
           </form>
         </div>
-        <div class="col-5">
+        <div class="d-none d-block col-5">
           <div class="no-data" *ngIf="urls.length == 0">
             <img src="assets/images/sorry.gif" alt="no data yet" />
             <h4>Please upload some images</h4>
