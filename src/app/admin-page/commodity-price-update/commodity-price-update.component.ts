@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { s3Client } from 'src/app/service/aws-sdk';
+// import { s3Client } from 'src/app/service/aws-sdk';
 import { DataService } from 'src/app/service/data.service';
 import { UtilityService } from 'src/app/service/utils.service';
 import Swal from 'sweetalert2';
-import { ListBucketsCommand } from '@aws-sdk/client-s3';
+// import { ListBucketsCommand } from '@aws-sdk/client-s3';
 
 declare var $: any;
 
@@ -108,88 +108,126 @@ export class CommodityPriceUpdateComponent implements OnInit {
   }
 
   onUpdate() {
-    if (
-      this.selectedCountry == {} ||
-      this.savePriceData.amount == '' ||
-      this.selectedCommodity == {}
-    ) {
-      Swal.fire({
-        title: 'Validation!',
-        text: 'All Fields are required',
-        icon: 'warning',
-        showConfirmButton: false,
-      });
-      return;
-    }
-    this.utilService.showLoading();
-    this.savePriceData.commodityId = this.selectedCommodity.id;
-    this.savePriceData.countryId = this.selectedCountry.code;
-    this.savePriceData.amount = `${this.savePriceData.amount}`;
-    this.dataService
-      .eidtPrice(this.savePriceData, this.savePriceData.id)
-      .subscribe(
-        (data) => {
-          console.log(data);
-          if (data.success) {
-            this.modalClose.nativeElement.click();
-            this.savePriceData = {};
-            this.utilService.hideLoading();
-            this.utilService.showSuccess('', data.message);
-            this.getPriceData();
-            this.getCommodities();
-          }
-          console.log(data);
-        },
-        (error) => {
-          this.modalClose.nativeElement.click();
-          this.savePriceData = {};
-          this.utilService.hideLoading();
-          this.utilService.showError('', 'All Fields are required');
-          this.getPriceData();
-          this.getCommodities();
-        }
-      );
+    // if (
+    //   this.selectedCountry == {} ||
+    //   this.savePriceData.amount == '' ||
+    //   this.selectedCommodity == {}
+    // ) {
+    //   Swal.fire({
+    //     title: 'Validation!',
+    //     text: 'All Fields are required',
+    //     icon: 'warning',
+    //     showConfirmButton: false,
+    //   });
+    //   return;
+    // }
+    // this.utilService.showLoading();
+    // this.savePriceData.commodityId = this.selectedCommodity.id;
+    // this.savePriceData.countryId = this.selectedCountry.code;
+    // this.savePriceData.amount = `${this.savePriceData.amount}`;
+    // this.dataService
+    //   .eidtPrice(this.savePriceData, this.savePriceData.id)
+    //   .subscribe(
+    //     (data) => {
+    //       console.log(data);
+    //       if (data.success) {
+    //         this.modalClose.nativeElement.click();
+    //         this.savePriceData = {};
+    //         this.utilService.hideLoading();
+    //         this.utilService.showSuccess('', data.message);
+    //         this.getPriceData();
+    //         this.getCommodities();
+    //       }
+    //       console.log(data);
+    //     },
+    //     (error) => {
+    //       this.modalClose.nativeElement.click();
+    //       this.savePriceData = {};
+    //       this.utilService.hideLoading();
+    //       this.utilService.showError('', 'All Fields are required');
+    //       this.getPriceData();
+    //       this.getCommodities();
+    //     }
+    //   );
   }
 
   onSave() {
-    if (
-      this.selectedCountry == {} ||
-      this.savePriceData.amount == '' ||
-      this.selectedCommodity == {}
-    ) {
-      Swal.fire({
-        title: 'Validation!',
-        text: 'All Fields are required',
-        icon: 'warning',
-        showConfirmButton: false,
-      });
-      return;
-    }
-    this.utilService.showLoading();
-    this.savePriceData.commodityId = this.selectedCommodity.id;
-    this.savePriceData.countryId = this.selectedCountry.code;
-    this.savePriceData.amount = `${this.savePriceData.amount}`;
-    this.dataService.savePrice(this.savePriceData).subscribe(
-      (data) => {
-        console.log(data);
-        if (data.success) {
-          this.modalClose.nativeElement.click();
-          this.savePriceData = {};
-          this.utilService.hideLoading();
-          this.utilService.showSuccess('', data.message);
-          this.getPriceData();
-          this.getCommodities();
-        }
-        console.log(data);
-      },
-      (error) => {
-        this.modalClose.nativeElement.click();
-        this.savePriceData = {};
-        this.utilService.hideLoading();
-        this.utilService.showError('', 'All Fields are required');
-        this.getPriceData();
-        this.getCommodities();
-      }
-    );
+    // if (
+    //   this.selectedCountry == {} ||
+    //   this.savePriceData.amount == '' ||
+    //   this.selectedCommodity == {}
+    // ) {
+    //   Swal.fire({
+    //     title: 'Validation!',
+    //     text: 'All Fields are required',
+    //     icon: 'warning',
+    //     showConfirmButton: false,
+    //   });
+    //   return;
+    // }
+    // this.utilService.showLoading();
+    // this.savePriceData.commodityId = this.selectedCommodity.id;
+    // this.savePriceData.countryId = this.selectedCountry.code;
+    // this.savePriceData.amount = `${this.savePriceData.amount}`;
+    // this.dataService.savePrice(this.savePriceData).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     if (data.success) { // if (
+    //   this.selectedCountry == {} ||
+    //   this.savePriceData.amount == '' ||
+    //   this.selectedCommodity == {}
+    // ) {
+    //   Swal.fire({
+    //     title: 'Validation!',
+    //     text: 'All Fields are required',
+    //     icon: 'warning',
+    //     showConfirmButton: false,
+    //   });
+    //   return;
+    // }
+    // this.utilService.showLoading();
+    // this.savePriceData.commodityId = this.selectedCommodity.id;
+    // this.savePriceData.countryId = this.selectedCountry.code;
+    // this.savePriceData.amount = `${this.savePriceData.amount}`;
+    // this.dataService.savePrice(this.savePriceData).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     if (data.success) {
+    //       this.modalClose.nativeElement.click();
+    //       this.savePriceData = {};
+    //       this.utilService.hideLoading();
+    //       this.utilService.showSuccess('', data.message);
+    //       this.getPriceData();
+    //       this.getCommodities();
+    //     }
+    //     console.log(data);
+    //   },
+    //   (error) => {
+    //     this.modalClose.nativeElement.click();
+    //     this.savePriceData = {};
+    //     this.utilService.hideLoading();
+    //     this.utilService.showError('', 'All Fields are required');
+    //     this.getPriceData();
+    //     this.getCommodities();
+    //   }
+    // );
+    //       this.modalClose.nativeElement.click();
+    //       this.savePriceData = {};
+    //       this.utilService.hideLoading();
+    //       this.utilService.showSuccess('', data.message);
+    //       this.getPriceData();
+    //       this.getCommodities();
+    //     }
+    //     console.log(data);
+    //   },
+    //   (error) => {
+    //     this.modalClose.nativeElement.click();
+    //     this.savePriceData = {};
+    //     this.utilService.hideLoading();
+    //     this.utilService.showError('', 'All Fields are required');
+    //     this.getPriceData();
+    //     this.getCommodities();
+    //   }
+    // );
   }
 }

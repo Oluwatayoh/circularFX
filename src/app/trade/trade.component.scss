@@ -55,7 +55,7 @@
     padding: 0px 100px;
 }
 hr {
-    border: 1px solid #1b3664;
+    border: 1px solid #175d2d;
 }
 
 a {
@@ -142,13 +142,13 @@ a {
     left: 50%;
     top: 0%;
     transform: translateX(-50%);
-    background-color: #1b3664;
+    background-color: #175d2d;
     border-radius: 0px 0px 10px 10px;
     display: block;
     animation: bar 0.5s;
 }
 .s-box:hover {
-    box-shadow: 1px 1px 5px #1b36649c;
+    box-shadow: 1px 1px 5px #175d2d9c;
     transition: all ease 0.3s;
     background-color: #44af691f;
     cursor: pointer;

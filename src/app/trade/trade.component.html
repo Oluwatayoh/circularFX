@@ -34,7 +34,7 @@
 
     <div class="container">
       <div class="bck col-2" (click)="onShowTrade(0)">
-        <i-feather name="arrow-left-circle"></i-feather>
+        <!-- <i-feather name="arrow-left-circle"></i-feather> -->
         <div>Back to trade</div>
       </div>
       <div class="search-section" style="justify-content: space-between">
@@ -264,10 +264,10 @@
             <div class="preview-wrapper">
               <div class="img-preview" *ngFor="let url of images">
                 <img [src]="url" />
-                <i-feather
+                <!-- <i-feather
                   (click)="removeImage(url)"
                   name="x-circle"
-                ></i-feather>
+                ></i-feather> -->
               </div>
             </div>
           </div>

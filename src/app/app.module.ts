@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { WhatWeTradeComponent } from './content/what-we-trade/what-we-trade.component';
-import { IconsModule } from './icons/icons.module';
+// import { IconsModule } from './icons/icons.module';
 import { FooterComponent } from './footer/footer.component';
 import { DataService } from './service/data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -82,7 +82,7 @@ import { UtilityService } from './service/utils.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    IconsModule,
+    // IconsModule,
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,

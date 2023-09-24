@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-  
-  title = 'circularFX';
+
+  title = 'EcoCircleAfrica';
 
   constructor() { }
 

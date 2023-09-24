@@ -2,13 +2,14 @@
     display: none;
 }
 
-.btn-group {
-    width: 35%;
     .signup-btn {
-        font-size: 12px;
-        padding: 9px 30px;
+      background-color: #175d2d;
+      color: white;
+        padding:20px; 
+        margin-right: 2rem;
+        // width: 250px;
+        border-radius:15px;
     }
-}
 
 @media only screen and (max-width: 699px) {
     .nm {
@@ -72,7 +73,7 @@ a:hover {
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: #1b3664;
+    background: #175d2d;
     border-radius: 3px;
 
     z-index: 1;
@@ -91,7 +92,7 @@ a:hover {
     transform-origin: 0% 100%;
 }
 
-/* 
+/*
  * Transform all the slices of hamburger
  * into a crossmark.
  */
@@ -144,7 +145,7 @@ a:hover {
     padding: 10px 0;
     font-size: 18px;
     font-weight: bold;
-    color: #1b3664;
+    color: #175d2d;
 }
 /*
  * And let's fade it in from the left

@@ -59,7 +59,7 @@
     cursor: pointer;
     padding-left: 25px;
     transition: all 0.5s ease;
-    color: #1b3664;
+    color: #175d2d;
     z-index: 12;
 }
 #home:checked ~ .list label.home,
@@ -71,7 +71,7 @@
     color: #fff;
 }
 .content .list label:hover {
-    color: #1b3664;
+    color: #175d2d;
 }
 .content .slider {
     position: absolute;
@@ -80,7 +80,7 @@
     height: 60px;
     width: 100%;
     //   border-radius: 12px;
-    background: #1b3664;
+    background: #175d2d;
     transition: all 0.4s ease;
     // padding: 40px 50px 40px 40px;
 }
@@ -118,7 +118,7 @@
     font-size: 25px;
     margin-bottom: 10px;
     font-weight: 500;
-    color: #1b3664;
+    color: #175d2d;
 }
 .content .text p {
     text-align: justify;

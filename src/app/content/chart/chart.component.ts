@@ -180,7 +180,7 @@ export class ChartComponent implements OnInit {
           },
           itemStyle: {
             shadowBlur: 10,
-            shadowColor: '#1b3664',
+            shadowColor: '#175d2d',
             shadowOffsetY: 5,
             color: {
               type: 'radial',

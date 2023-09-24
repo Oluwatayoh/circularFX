@@ -141,7 +141,7 @@ export class ChartCompareComponent implements OnInit {
 
 
     this.options = {
-      backgroundColor: '#1b3664',
+      backgroundColor: '#175d2d',
       tooltip: {
         trigger: 'axis',
 
